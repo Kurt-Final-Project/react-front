@@ -1,0 +1,19 @@
+.button {
+	flex: 1;
+	background-color: transparent;
+	border-radius: 5px;
+	font-size: 2rem;
+	border: 0;
+}
+
+.button:hover {
+	cursor: pointer;
+}
+
+.icon:hover {
+	color: blue;
+}
+
+.icon.liked:hover {
+	color: black;
+}

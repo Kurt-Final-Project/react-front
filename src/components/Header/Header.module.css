@@ -1,0 +1,36 @@
+.bodyContainer {
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+}
+
+.feedContainer {
+	text-align: center;
+	width: 45rem;
+	outline: var(--outline);
+	overflow: auto;
+	min-height: 100vh;
+}
+
+.container {
+	display: flex;
+}
+
+.header {
+	top: 0;
+	position: sticky;
+	background-color: rgba(255, 255, 255, 0.7);
+	outline: var(--outline);
+	backdrop-filter: blur(5px);
+	text-align: left;
+}
+
+.headerText {
+	margin-left: 1rem;
+}
+
+.navigation {
+	top: 0;
+	position: sticky;
+	overflow-y: unset;
+}

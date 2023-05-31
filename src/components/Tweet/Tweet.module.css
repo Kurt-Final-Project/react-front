@@ -1,0 +1,49 @@
+.content {
+	display: flex;
+	align-content: center;
+	align-self: center;
+	gap: 2rem;
+	margin-left: 2rem;
+	margin-top: 1rem;
+	cursor: text;
+}
+
+.userImage {
+	height: 5rem;
+	width: 5rem;
+	border-radius: 50%;
+}
+
+.message {
+	padding: 0.5rem;
+	border: none;
+	text-align: left;
+	font-size: 1rem;
+	align-self: center;
+	width: 80%;
+	overflow-y: hidden;
+	resize: none;
+	max-height: 15rem;
+}
+
+.message:focus {
+	border: none;
+}
+
+.btn {
+	display: flex;
+	justify-content: flex-end;
+	margin-right: 1rem;
+}
+
+.btnStyle {
+	border: none;
+	border-radius: 2rem;
+	background-color: transparent;
+	font-size: 1.125rem;
+	background-color: rgba(25, 100, 255, 1);
+	padding: 0.5rem 2rem 0.5rem 2rem;
+	color: white;
+	font-weight: bold;
+	margin-bottom: 0.5rem;
+}

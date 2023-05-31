@@ -1,0 +1,10 @@
+.container {
+	word-wrap: break-word;
+	margin-top: 1rem;
+}
+
+.content {
+	padding-top: 1rem;
+	padding-bottom: 1rem;
+	outline: var(--outline);
+}
