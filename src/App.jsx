@@ -4,7 +4,7 @@ import Entrypoint from "./pages/Entrypoint";
 import Feed from "./pages/Feed";
 import Post from "./pages/Post";
 import Profile from "./pages/Profile";
-import Login from "./pages/Login";
+import Login, { action as loginAction } from "./pages/Login";
 import Signup from "./pages/Signup";
 import Header from "./components/Header";
 
@@ -19,6 +19,7 @@ const router = createBrowserRouter([
 			{
 				path: "login",
 				element: <Login />,
+				action: loginAction,
 			},
 			{
 				path: "signup",
