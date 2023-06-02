@@ -1,8 +1,9 @@
 import React from "react";
 import Input from "../../components/Input";
-import { useSubmit } from "react-router-dom";
+import { useSubmit, NavLink } from "react-router-dom";
 import { Formik, Form } from "formik";
 import { MdError } from "react-icons/md";
+import bg from "../../assets/blog-bg.svg";
 
 import classes from "./Login.module.css";
 
@@ -12,16 +13,12 @@ const Login = () => {
 	return (
 		<div className={classes.container}>
 			<div className={classes.child}>
-				<img
-					className={classes.backgroundImage}
-					src={"https://pepperyourcontent.com/wp-content/uploads/2021/12/5-Ways-to-Spice-Up-Your-Boring-Niche-Blog.png"}
-					alt="background"
-				/>
+				<img className={classes.backgroundImage} src={bg} alt="background" />
 			</div>
 
 			<div className={classes.child}>
 				<Formik
-					initialValues={{ firstname: "", lastname: "", email: "", password: "" }}
+					initialValues={{ email: "", password: "" }}
 					validate={(values) => {
 						const errors = {};
 						if (!values.email) {
@@ -49,24 +46,6 @@ const Login = () => {
 							);
 						}
 
-						if (!values.firstname) {
-							errors.firstname = (
-								<i className={classes.errorText}>
-									<MdError />
-									Required
-								</i>
-							);
-						}
-
-						if (!values.lastname) {
-							errors.lastname = (
-								<i className={classes.errorText}>
-									<MdError />
-									Required
-								</i>
-							);
-						}
-
 						return errors;
 					}}
 					onSubmit={(values, { setSubmitting }) => {
@@ -83,12 +62,8 @@ const Login = () => {
 					{({ isSubmitting, errors, touched }) => (
 						<Form className={classes.form}>
 							<div className={classes.formText}>
-								<h1 classes={classes.headingText}>Signup</h1>
+								<h1 classes={classes.headingText}>Login</h1>
 								<p className={classes.midText}>Start blogging your journey!</p>
-							</div>
-							<div className={classes.fieldName}>
-								<Input type="text" name="firstname" placeholder="First Name" isInvalidField={errors.firstname && touched.firstname} />
-								<Input type="text" name="lastname" placeholder="Last Name" isInvalidField={errors.lastname && touched.lastname} />
 							</div>
 
 							<div className={classes.fieldName}>
@@ -101,10 +76,10 @@ const Login = () => {
 							</button>
 
 							<div className={classes.linkContainer}>
-								Already have an account?
-								<a href="login" className={classes.link}>
-									Login
-								</a>
+								Dont have an account?
+								<NavLink to="/signup" className={classes.link}>
+									Signup
+								</NavLink>
 							</div>
 						</Form>
 					)}
