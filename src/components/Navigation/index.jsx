@@ -43,7 +43,7 @@ const Navigation = () => {
 						</div>
 					</NavLink> */}
 					<NavLink
-						to={"/profile"}
+						to={"/profile/1"}
 						className={classes.linkItem}
 						style={({ isActive, isPending }) => {
 							return {

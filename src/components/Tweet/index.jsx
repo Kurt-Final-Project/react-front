@@ -18,7 +18,13 @@ const Tweet = () => {
 					alt="img"
 					className={classes.userImage}
 				/>
-				<textarea className={classes.message} value={textareaValue} onChange={handleTextareaInput} placeholder="What's on your mind?" />
+				<textarea
+					className={classes.message}
+					value={textareaValue}
+					onChange={handleTextareaInput}
+					placeholder="What's on your mind?"
+					maxLength={450}
+				/>
 			</div>
 			<div className={classes.btn}>
 				<button className={classes.btnStyle}>Post</button>

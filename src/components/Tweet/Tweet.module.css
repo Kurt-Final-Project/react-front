@@ -15,15 +15,16 @@
 }
 
 .message {
+	all: unset;
+	margin-right: 3rem;
 	padding: 0.5rem;
-	border: none;
 	text-align: left;
-	font-size: 1rem;
+	font-size: 1.125rem;
 	align-self: center;
 	width: 80%;
 	overflow-y: hidden;
 	resize: none;
-	max-height: 15rem;
+	max-height: 20rem;
 }
 
 .message:focus {

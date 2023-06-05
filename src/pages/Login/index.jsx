@@ -37,11 +37,11 @@ const Login = () => {
 							);
 						}
 
-						if (values.password < 8) {
+						if (!values.password) {
 							errors.password = (
 								<i className={classes.errorText}>
 									<MdError />
-									Password must be at least 8 characters or more
+									Required
 								</i>
 							);
 						}

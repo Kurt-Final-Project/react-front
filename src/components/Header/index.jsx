@@ -7,7 +7,7 @@ import classes from "./Header.module.css";
 
 const Header = () => {
 	const location = useLocation();
-	const currentPath = location.pathname.slice(1);
+	const currentPath = location.pathname.split("/")[1];
 
 	return (
 		<div className={classes.container}>

@@ -6,7 +6,7 @@
 
 .feedContainer {
 	text-align: center;
-	width: 45rem;
+	width: 50rem;
 	outline: var(--outline);
 	overflow: auto;
 	min-height: 100vh;

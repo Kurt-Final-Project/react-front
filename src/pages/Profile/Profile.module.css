@@ -1,0 +1,59 @@
+/* .container {
+	margin-top: 1rem;
+} */
+.userContainer {
+	height: 15rem;
+	min-height: fit-content;
+	background-color: transparent;
+}
+
+.userContainer .userImage {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.profileInfo {
+	display: flex;
+	align-items: center;
+	margin: 1rem;
+	justify-content: space-between;
+}
+
+.userInfo {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	word-wrap: break-word;
+	text-align: left;
+	width: 40rem;
+	gap: 0.5rem;
+}
+
+.userInfo .userName {
+	font-size: 1.25rem;
+	font-weight: bold;
+}
+
+.userInfo .dateCreated {
+	color: rgb(83, 100, 113);
+}
+
+.userInfo .userMotto {
+	font-style: italic;
+}
+
+.btnEdit {
+	align-self: flex-end;
+	min-height: 3rem;
+	border: none;
+	border-radius: 5px;
+	background-color: white;
+	color: rgba(25, 100, 255, 1);
+	font-weight: 600;
+	font-size: 1.125rem;
+	cursor: pointer;
+	box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.12) 0px 1px 1px 0px,
+		rgb(84, 105, 212) 0px 0px 0px 1px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px,
+		rgba(60, 66, 87, 0.08) 0px 2px 5px 0px;
+}

@@ -1,5 +1,6 @@
 .backgroundImage {
-	height: calc(100vh - 6px);
+	margin-top: 2rem;
+	height: calc(100vh - 2.5rem);
 	width: 55rem;
 	object-fit: cover;
 }
