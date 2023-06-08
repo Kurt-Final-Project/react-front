@@ -12,4 +12,5 @@ const posts = Array.from({ length: 10 }, (_, i) => {
 	};
 });
 
+console.log(posts);
 export default posts;
