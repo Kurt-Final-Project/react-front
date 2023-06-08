@@ -1,7 +1,7 @@
 import React, { useMemo, memo } from "react";
 import Post from "../../components/Post";
 import Comment from "../../components/Comment";
-import samplePosts from "../../store/sample.posts";
+import samplePosts from "../../store/sample.posts.json";
 import { useParams } from "react-router-dom";
 
 const SinglePost = () => {

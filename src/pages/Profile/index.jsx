@@ -4,7 +4,7 @@ import classes from "./Profile.module.css";
 import Post from "../../components/Post";
 import bg from "../../assets/blog-bg.svg";
 
-import samplePosts from "../../store/sample.posts";
+import samplePosts from "../../store/sample.posts.json";
 
 const Profile = () => {
 	return (
