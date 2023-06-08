@@ -10,10 +10,27 @@
 	cursor: pointer;
 }
 
-.icon:hover {
+.button:hover {
+	color: blue;
+	background-color: rgba(0, 0, 255, 0.025);
+}
+
+.liked {
 	color: blue;
 }
 
-.icon.liked:hover {
-	color: black;
+.iconContainer {
+	display: flex;
+	flex: 1;
+	justify-content: center;
+	align-items: center;
+	gap: 0.5rem;
+	min-height: 1.75rem;
+	font-size: 1.25rem;
+	margin: 0.25rem 0;
+}
+
+.buttonText {
+	color: rgb(83, 100, 113);
+	font-size: 1rem;
 }

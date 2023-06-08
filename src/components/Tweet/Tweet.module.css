@@ -38,6 +38,7 @@
 }
 
 .btnStyle {
+	cursor: pointer;
 	border: none;
 	border-radius: 2rem;
 	background-color: transparent;

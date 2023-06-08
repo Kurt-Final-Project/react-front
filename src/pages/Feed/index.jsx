@@ -1,16 +1,18 @@
 import React from "react";
-import classes from "./Feed.module.css";
 import Post from "../../components/Post";
 import Tweet from "../../components/Tweet";
+
+import fakeSamples from "../../store/sample.posts";
+import classes from "./Feed.module.css";
 
 const Feed = () => {
 	return (
 		<div className={classes.container}>
 			<Tweet />
-			<Post />
-			<Post />
-			<Post />
-			<Post />
+			{console.log(fakeSamples)}
+			{fakeSamples.map((data) => {
+				return <Post postDetails={data} />;
+			})}
 		</div>
 	);
 };

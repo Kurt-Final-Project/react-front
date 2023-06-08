@@ -1,0 +1,78 @@
+.containerEdit {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	flex: 1;
+	align-items: center;
+	margin-top: 10rem;
+	overflow: hidden;
+	z-index: 10;
+}
+
+.userProfile {
+	margin: 0 0 1rem 2rem;
+	align-self: flex-start;
+	font-size: 1.25rem;
+	font-weight: bold;
+}
+
+.form {
+	display: flex;
+	flex: 1;
+	width: 90%;
+	flex-direction: column;
+}
+
+.fieldName:nth-child(2) {
+	display: flex;
+	column-gap: 1rem;
+	flex-wrap: wrap;
+}
+
+.btnSubmit {
+	min-height: 3rem;
+	border: none;
+	border-radius: 5px;
+	background-color: rgba(25, 100, 255, 1);
+	color: white;
+	font-weight: 600;
+	font-size: 1.125rem;
+	cursor: pointer;
+	box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.12) 0px 1px 1px 0px,
+		rgb(84, 105, 212) 0px 0px 0px 1px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px,
+		rgba(60, 66, 87, 0.08) 0px 2px 5px 0px;
+}
+
+.formText {
+	line-height: 1.125rem;
+	align-self: flex-start;
+}
+
+.perField {
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+}
+
+.errorText {
+	display: flex;
+	align-items: center;
+	column-gap: 0.5rem;
+	color: rgba(255, 0, 0, 0.6);
+	font-size: 1rem;
+}
+
+.linkContainer {
+	display: flex;
+	gap: 0.5rem;
+	justify-content: center;
+	color: rgba(0, 0, 0, 0.5);
+	margin-top: 2rem;
+}
+
+.link {
+	color: black;
+	text-decoration: none;
+	font-weight: bold;
+	text-align: center;
+}

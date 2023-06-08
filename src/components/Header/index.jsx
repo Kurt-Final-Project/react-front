@@ -8,6 +8,7 @@ import classes from "./Header.module.css";
 const Header = () => {
 	const location = useLocation();
 	const currentPath = location.pathname.split("/")[1];
+	const finalPath = currentPath === "edit-profile" ? "Edit Profile" : currentPath;
 
 	return (
 		<div className={classes.container}>
@@ -16,7 +17,7 @@ const Header = () => {
 			</div>
 			<div className={classes.bodyContainer}>
 				<div className={classes.header}>
-					<h2 className={classes.headerText}>{currentPath}</h2>
+					<h2 className={classes.headerText}>{finalPath}</h2>
 				</div>
 				<div className={classes.feedContainer}>
 					<Outlet />

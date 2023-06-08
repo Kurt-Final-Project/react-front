@@ -11,12 +11,27 @@ const ImpressionButton = ({ type, isLiked }) => {
 
 	const [isUserLiked, setIsUserLiked] = useState(isLiked);
 
-	let buttonType = <VscComment className={classes.icon} />;
+	let buttonType = (
+		<div className={classes.iconContainer}>
+			<VscComment className={`${classes.icon}`} />
+			<div className={classes.buttonText}>Comment</div>
+		</div>
+	);
 
 	if (type === "like" && !isUserLiked) {
-		buttonType = <AiOutlineLike className={classes.icon} />;
+		buttonType = (
+			<div className={classes.iconContainer}>
+				<AiOutlineLike className={classes.icon} />
+				<div className={classes.buttonText}>Like</div>
+			</div>
+		);
 	} else if (type === "like" && isUserLiked) {
-		buttonType = <AiFillLike className={`${classes.icon} ${classes.liked}`} />;
+		buttonType = (
+			<div className={classes.iconContainer}>
+				<AiFillLike className={`${classes.icon} ${classes.liked}`} />
+				<div className={classes.buttonText}>Liked</div>
+			</div>
+		);
 	}
 
 	return (

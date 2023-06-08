@@ -15,6 +15,7 @@ ul {
 }
 
 .linkItem {
+	all: unset;
 	font-size: 1.5rem;
 	margin: 1rem;
 	color: black;
@@ -39,4 +40,11 @@ ul {
 
 .active {
 	font-weight: bold;
+}
+
+.logoutBtn {
+	all: unset;
+	width: 100%;
+	min-height: 100%;
+	background-color: red;
 }

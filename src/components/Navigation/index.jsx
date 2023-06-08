@@ -1,13 +1,23 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
-
+import { NavLink, useNavigate } from "react-router-dom";
 import { CgFeed } from "react-icons/cg";
+import { useDispatch } from "react-redux";
+import { authActions } from "../../store/authSlice";
+
 // import { MdOutlineTravelExplore } from "react-icons/md";
 import { AiOutlineUser } from "react-icons/ai";
 import { RiLogoutCircleLine } from "react-icons/ri";
 import classes from "./Navigation.module.css";
 
 const Navigation = () => {
+	const navigate = useNavigate();
+	const dispatch = useDispatch();
+
+	const onLogoutHandler = () => {
+		navigate("/");
+		dispatch(authActions.logout());
+	};
+
 	return (
 		<div className={classes.container}>
 			<nav>
@@ -57,12 +67,12 @@ const Navigation = () => {
 							Profile
 						</div>
 					</NavLink>
-					<NavLink className={classes.linkItem}>
+					<button className={classes.linkItem} onClick={onLogoutHandler}>
 						<div className={classes.linkContent}>
 							<RiLogoutCircleLine size={35} />
 							Logout
 						</div>
-					</NavLink>
+					</button>
 				</ul>
 			</nav>
 		</div>

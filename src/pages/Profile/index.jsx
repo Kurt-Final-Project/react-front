@@ -1,7 +1,10 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import classes from "./Profile.module.css";
 import Post from "../../components/Post";
 import bg from "../../assets/blog-bg.svg";
+
+import samplePosts from "../../store/sample.posts";
 
 const Profile = () => {
 	return (
@@ -19,13 +22,13 @@ const Profile = () => {
 					<div className={classes.dateCreated}>Birthday: {new Date().toLocaleDateString()}</div>
 					<div className={classes.dateCreated}>Account Created: {new Date().toUTCString()}</div>
 				</div>
-				<button className={classes.btnEdit}>Edit Profile</button>
+				<Link to={"/edit-profile"}>
+					<button className={classes.btnEdit}>Edit Profile</button>
+				</Link>
 			</div>
-			<Post />
-			<Post />
-			<Post />
-			<Post />
-			<Post />
+			{samplePosts.map((data) => {
+				return <Post postDetails={data} />;
+			})}
 		</div>
 	);
 };

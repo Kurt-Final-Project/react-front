@@ -15,7 +15,7 @@
 
 .profileInfo {
 	display: flex;
-	align-items: center;
+	align-items: flex-end;
 	margin: 1rem;
 	justify-content: space-between;
 }
@@ -44,7 +44,6 @@
 }
 
 .btnEdit {
-	align-self: flex-end;
 	min-height: 3rem;
 	border: none;
 	border-radius: 5px;

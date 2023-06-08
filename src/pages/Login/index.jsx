@@ -1,14 +1,33 @@
 import React from "react";
 import Input from "../../components/Input";
-import { useSubmit, NavLink } from "react-router-dom";
+import { useSubmit, NavLink, useNavigate } from "react-router-dom";
 import { Formik, Form } from "formik";
+
+import { useDispatch } from "react-redux";
+import { authActions } from "../../store/authSlice";
+
+import classes from "./Login.module.css";
 import { MdError } from "react-icons/md";
 import bg from "../../assets/blog-bg.svg";
 
-import classes from "./Login.module.css";
-
 const Login = () => {
-	const submit = useSubmit();
+	// const submit = useSubmit();
+	const navigate = useNavigate();
+	const dispatch = useDispatch();
+
+	const onUserSubmit = (values) => {
+		const { email, password } = values;
+
+		if (email === "test@test.com" && password === "123") {
+			// http post
+			const token = "hahahaha";
+
+			dispatch(authActions.login({ token }));
+			localStorage.setItem("token", token);
+
+			return navigate("/");
+		}
+	};
 
 	return (
 		<div className={classes.container}>
@@ -49,14 +68,8 @@ const Login = () => {
 						return errors;
 					}}
 					onSubmit={(values, { setSubmitting }) => {
-						setTimeout(() => {
-							submit(values, {
-								method: "POST",
-								action: "",
-							});
-
-							setSubmitting(false);
-						}, 400);
+						onUserSubmit(values);
+						setSubmitting(false);
 					}}
 				>
 					{({ isSubmitting, errors, touched }) => (
@@ -92,9 +105,8 @@ const Login = () => {
 export default Login;
 
 export async function action({ params, request }) {
-	let formData = await request.formData();
-	const email = formData.get("email");
-	const password = formData.get("password");
-
-	return null;
+	// let formData = await request.formData();
+	// const email = formData.get("email");
+	// const password = formData.get("password");
+	// return null;
 }
