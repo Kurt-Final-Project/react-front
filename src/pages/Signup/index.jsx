@@ -1,5 +1,7 @@
 import React from "react";
 import Input from "../../components/Input";
+import Button from "../../components/Button";
+
 import { useSubmit, NavLink } from "react-router-dom";
 import { Formik, Form } from "formik";
 import { MdError } from "react-icons/md";
@@ -18,7 +20,7 @@ const Signup = () => {
 
 			<div className={classes.child}>
 				<Formik
-					initialValues={{ firstname: "", lastname: "", email: "", password: "" }}
+					initialValues={{ firstname: "", lastname: "", username: "", email: "", password: "" }}
 					validate={(values) => {
 						const errors = {};
 						if (!values.email) {
@@ -93,9 +95,7 @@ const Signup = () => {
 								<Input type="password" name="password" placeholder="Password" isInvalidField={errors.password && touched.password} />
 							</div>
 
-							<button type="submit" disabled={isSubmitting} className={classes.btnSubmit}>
-								Submit
-							</button>
+							<Button type="submit" disabled={isSubmitting} className={classes.btnSubmit} btnText={"Submit"} />
 
 							<div className={classes.linkContainer}>
 								Already have an account?

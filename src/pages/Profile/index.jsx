@@ -1,9 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import classes from "./Profile.module.css";
 import Post from "../../components/Post";
 import bg from "../../assets/blog-bg.svg";
+import Button from "../../components/Button";
 
+import classes from "./Profile.module.css";
 import samplePosts from "../../store/sample.posts.json";
 
 const Profile = () => {
@@ -23,7 +24,7 @@ const Profile = () => {
 					<div className={classes.dateCreated}>Account Created: {new Date().toUTCString()}</div>
 				</div>
 				<Link to={"/edit-profile"}>
-					<button className={classes.btnEdit}>Edit Profile</button>
+					<Button className={classes.btnEdit} btnText={"Edit Profile"} />
 				</Link>
 			</div>
 			{samplePosts.map((data) => {

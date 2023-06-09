@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import Button from "../Button";
+
 import classes from "./Tweet.module.css";
 
 const Tweet = () => {
@@ -27,7 +29,7 @@ const Tweet = () => {
 				/>
 			</div>
 			<div className={classes.btn}>
-				<button className={classes.btnStyle}>Post</button>
+				<Button btnText={"Post"} />
 			</div>
 		</div>
 	);

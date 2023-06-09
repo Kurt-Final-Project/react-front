@@ -1,8 +1,9 @@
 import React from "react";
 import Input from "../../components/Input";
+import Button from "../../components/Button";
+
 import { useSubmit, NavLink, useNavigate } from "react-router-dom";
 import { Formik, Form } from "formik";
-
 import { useDispatch } from "react-redux";
 import { authActions } from "../../store/authSlice";
 
@@ -84,9 +85,7 @@ const Login = () => {
 								<Input type="password" name="password" placeholder="Password" isInvalidField={errors.password && touched.password} />
 							</div>
 
-							<button type="submit" disabled={isSubmitting} className={classes.btnSubmit}>
-								Submit
-							</button>
+							<Button type="submit" disabled={isSubmitting} className={classes.btnSubmit} btnText={"Submit"} />
 
 							<div className={classes.linkContainer}>
 								Dont have an account?

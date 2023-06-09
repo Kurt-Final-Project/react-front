@@ -3,6 +3,7 @@ import { useSubmit } from "react-router-dom";
 import { Formik, Form } from "formik";
 import { MdError } from "react-icons/md";
 import Input from "../../components/Input";
+import File from "../../components/File";
 
 import classes from "../EditProfile/EditProfile.module.css";
 
@@ -12,7 +13,7 @@ const EditProfile = () => {
 	return (
 		<div className={classes.containerEdit}>
 			<Formik
-				initialValues={{ firstname: "", lastname: "", username: "", date: "" }}
+				initialValues={{ firstname: "", lastname: "", username: "", birthdate: "", image: "" }}
 				validate={(values) => {
 					const errors = {};
 					if (!values.username) {
@@ -24,8 +25,17 @@ const EditProfile = () => {
 						);
 					}
 
-					if (!values.date) {
-						errors.date = (
+					if (!values.birthdate) {
+						errors.birthdate = (
+							<i className={classes.errorText}>
+								<MdError />
+								Required
+							</i>
+						);
+					}
+
+					if (!values.image) {
+						errors.image = (
 							<i className={classes.errorText}>
 								<MdError />
 								Required
@@ -55,10 +65,7 @@ const EditProfile = () => {
 				}}
 				onSubmit={(values, { setSubmitting }) => {
 					setTimeout(() => {
-						submit(values, {
-							method: "POST",
-							action: "",
-						});
+						console.log(values);
 
 						setSubmitting(false);
 					}, 400);
@@ -76,8 +83,9 @@ const EditProfile = () => {
 						</div>
 
 						<div className={classes.fieldName}>
+							<File type="file" name="image" placeholder="File" isInvalidField={errors.image && touched.image} />
 							<Input type="text" name="username" placeholder="Username" isInvalidField={errors.username && touched.username} />
-							<Input type="date" name="date" placeholder="Birthday" isInvalidField={errors.date && touched.date} />
+							<Input type="date" name="birthdate" placeholder="Birthday" isInvalidField={errors.birthdate && touched.birthdate} />
 						</div>
 
 						<button type="submit" disabled={isSubmitting} className={classes.btnSubmit}>
