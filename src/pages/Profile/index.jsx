@@ -17,14 +17,15 @@ const Profile = () => {
 				<div className={classes.userInfo}>
 					<div className={classes.userName}>Name na mahaba mahaba </div>
 					<div className={classes.userMotto}>
-						Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi, cupiditate nisi. Vero, id maiores aliquam ab voluptatum
-						obcaecati animi aspernatur voluptates modi et provident nulla, explicabo voluptate velit, inventore nemo?
+						Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi, cupiditate nisi. Vero, id maiores aliquam ab
+						voluptatum obcaecati animi aspernatur voluptates modi et provident nulla, explicabo voluptate velit,
+						inventore nemo?
 					</div>
 					<div className={classes.dateCreated}>Birthday: {new Date().toLocaleDateString()}</div>
 					<div className={classes.dateCreated}>Account Created: {new Date().toUTCString()}</div>
 				</div>
 				<Link to={"/edit-profile"}>
-					<Button className={classes.btnEdit} btnText={"Edit Profile"} />
+					<Button className={classes.btnEdit} btntext={"Edit Profile"} />
 				</Link>
 			</div>
 			{samplePosts.map((data) => {

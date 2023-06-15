@@ -1,17 +1,29 @@
 import React from "react";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
+import ErrorText from "../../components/ErrorText";
+import ToasterContainer from "../../components/Toaster";
 
-import { useSubmit, NavLink } from "react-router-dom";
 import { Formik, Form } from "formik";
-import { MdError } from "react-icons/md";
+import { NavLink, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { authActions } from "../../store/authSlice";
 
+import handleUserSubmit from "./api";
 import bg from "../../assets/blog-background.svg";
 import classes from "./Signup.module.css";
 
 const Signup = () => {
-	const submit = useSubmit();
+	const navigate = useNavigate();
+	const dispatch = useDispatch();
 
+	const onUserSubmitHandler = async (...args) => {
+		const payload = await handleUserSubmit(...args);
+		if (payload?.token) {
+			dispatch(authActions.login(payload));
+			return navigate("/");
+		}
+	};
 	return (
 		<div className={classes.container}>
 			<div className={classes.child}>
@@ -20,64 +32,44 @@ const Signup = () => {
 
 			<div className={classes.child}>
 				<Formik
-					initialValues={{ firstname: "", lastname: "", username: "", email: "", password: "" }}
+					initialValues={{ first_name: "", last_name: "", user_at: "", email: "", password: "", confirmPassword: "" }}
 					validate={(values) => {
 						const errors = {};
+
 						if (!values.email) {
-							errors.email = (
-								<i className={classes.errorText}>
-									<MdError />
-									Required
-								</i>
-							);
+							errors.email = <ErrorText>Required</ErrorText>;
 						} else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
-							errors.email = (
-								<i className={classes.errorText}>
-									<MdError />
-									Invalid email address
-								</i>
-							);
+							errors.email = <ErrorText>Invalid email address</ErrorText>;
 						}
 
-						if (values.password < 8) {
-							errors.password = (
-								<i className={classes.errorText}>
-									<MdError />
-									Password must be at least 8 characters or more
-								</i>
-							);
+						if (!values.user_at) {
+							errors.user_at = <ErrorText>Required</ErrorText>;
+						} else if (!/^[\w.-]+$/.test(values.user_at)) {
+							errors.user_at = <ErrorText>Username must only contain alphanumeric characters</ErrorText>;
 						}
 
-						if (!values.firstname) {
-							errors.firstname = (
-								<i className={classes.errorText}>
-									<MdError />
-									Required
-								</i>
-							);
+						const maxCharacters = 8;
+						if (values.password.length < maxCharacters) {
+							errors.password = <ErrorText>Password must be at least 8 characters or more</ErrorText>;
 						}
 
-						if (!values.lastname) {
-							errors.lastname = (
-								<i className={classes.errorText}>
-									<MdError />
-									Required
-								</i>
-							);
+						if (!values.confirmPassword) {
+							errors.confirmPassword = <ErrorText>Required</ErrorText>;
+						} else if (values.password.length >= maxCharacters && values.password !== values.confirmPassword) {
+							errors.confirmPassword = <ErrorText>Password does not match</ErrorText>;
+						}
+
+						if (!values.first_name) {
+							errors.first_name = <ErrorText>Required</ErrorText>;
+						}
+
+						if (!values.last_name) {
+							errors.last_name = <ErrorText>Required</ErrorText>;
 						}
 
 						return errors;
 					}}
-					onSubmit={(values, { setSubmitting }) => {
-						setTimeout(() => {
-							submit(values, {
-								method: "POST",
-								action: "",
-							});
-
-							setSubmitting(false);
-						}, 400);
-					}}
+					onSubmit={onUserSubmitHandler}
 				>
 					{({ isSubmitting, errors, touched }) => (
 						<Form className={classes.form}>
@@ -86,16 +78,44 @@ const Signup = () => {
 								<p className={classes.midText}>Start blogging your journey!</p>
 							</div>
 							<div className={classes.fieldName}>
-								<Input type="text" name="firstname" placeholder="First Name" isInvalidField={errors.firstname && touched.firstname} />
-								<Input type="text" name="lastname" placeholder="Last Name" isInvalidField={errors.lastname && touched.lastname} />
+								<Input
+									type="text"
+									name="first_name"
+									placeholder="First Name"
+									isInvalidField={errors.first_name && touched.first_name}
+								/>
+								<Input
+									type="text"
+									name="last_name"
+									placeholder="Last Name"
+									isInvalidField={errors.last_name && touched.last_name}
+								/>
 							</div>
 
 							<div className={classes.fieldName}>
+								<Input
+									type="text"
+									name="user_at"
+									placeholder="Username"
+									isInvalidField={errors.user_at && touched.user_at}
+								/>
 								<Input type="email" name="email" placeholder="Email" isInvalidField={errors.email && touched.email} />
-								<Input type="password" name="password" placeholder="Password" isInvalidField={errors.password && touched.password} />
+								<Input
+									type="password"
+									name="password"
+									placeholder="Password"
+									isInvalidField={errors.password && touched.password}
+								/>
+
+								<Input
+									type="password"
+									name="confirmPassword"
+									placeholder="Confirm Password"
+									isInvalidField={errors.confirmPassword && touched.confirmPassword}
+								/>
 							</div>
 
-							<Button type="submit" disabled={isSubmitting} className={classes.btnSubmit} btnText={"Submit"} />
+							<Button type="submit" disabled={isSubmitting} className={classes.btnSubmit} btntext={"Submit"} />
 
 							<div className={classes.linkContainer}>
 								Already have an account?
@@ -107,6 +127,7 @@ const Signup = () => {
 					)}
 				</Formik>
 			</div>
+			<ToasterContainer />
 		</div>
 	);
 };

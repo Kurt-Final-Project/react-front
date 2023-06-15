@@ -1,31 +1,26 @@
 import React from "react";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
+import ErrorText from "../../components/ErrorText";
+import ToasterContainer from "../../components/Toaster";
 
-import { useSubmit, NavLink, useNavigate } from "react-router-dom";
 import { Formik, Form } from "formik";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { authActions } from "../../store/authSlice";
 
-import classes from "./Login.module.css";
-import { MdError } from "react-icons/md";
+import handleUserSubmit from "./api";
 import bg from "../../assets/blog-bg.svg";
+import classes from "./Login.module.css";
 
 const Login = () => {
-	// const submit = useSubmit();
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 
-	const onUserSubmit = (values) => {
-		const { email, password } = values;
-
-		if (email === "test@test.com" && password === "123") {
-			// http post
-			const token = "hahahaha";
-
-			dispatch(authActions.login({ token }));
-			localStorage.setItem("token", token);
-
+	const onUserSubmitHandler = async (...args) => {
+		const payload = await handleUserSubmit(...args);
+		if (payload?.token) {
+			dispatch(authActions.login(payload));
 			return navigate("/");
 		}
 	};
@@ -42,36 +37,18 @@ const Login = () => {
 					validate={(values) => {
 						const errors = {};
 						if (!values.email) {
-							errors.email = (
-								<i className={classes.errorText}>
-									<MdError />
-									Required
-								</i>
-							);
+							errors.email = <ErrorText>Required</ErrorText>;
 						} else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
-							errors.email = (
-								<i className={classes.errorText}>
-									<MdError />
-									Invalid email address
-								</i>
-							);
+							errors.email = <ErrorText>Invalid email address</ErrorText>;
 						}
 
 						if (!values.password) {
-							errors.password = (
-								<i className={classes.errorText}>
-									<MdError />
-									Required
-								</i>
-							);
+							errors.password = <ErrorText>Required</ErrorText>;
 						}
 
 						return errors;
 					}}
-					onSubmit={(values, { setSubmitting }) => {
-						onUserSubmit(values);
-						setSubmitting(false);
-					}}
+					onSubmit={onUserSubmitHandler}
 				>
 					{({ isSubmitting, errors, touched }) => (
 						<Form className={classes.form}>
@@ -82,10 +59,15 @@ const Login = () => {
 
 							<div className={classes.fieldName}>
 								<Input type="email" name="email" placeholder="Email" isInvalidField={errors.email && touched.email} />
-								<Input type="password" name="password" placeholder="Password" isInvalidField={errors.password && touched.password} />
+								<Input
+									type="password"
+									name="password"
+									placeholder="Password"
+									isInvalidField={errors.password && touched.password}
+								/>
 							</div>
 
-							<Button type="submit" disabled={isSubmitting} className={classes.btnSubmit} btnText={"Submit"} />
+							<Button type="submit" disabled={isSubmitting} className={classes.btnSubmit} btntext={"Submit"} />
 
 							<div className={classes.linkContainer}>
 								Dont have an account?
@@ -97,15 +79,9 @@ const Login = () => {
 					)}
 				</Formik>
 			</div>
+			<ToasterContainer />
 		</div>
 	);
 };
 
 export default Login;
-
-export async function action({ params, request }) {
-	// let formData = await request.formData();
-	// const email = formData.get("email");
-	// const password = formData.get("password");
-	// return null;
-}

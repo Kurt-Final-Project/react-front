@@ -4,11 +4,11 @@ import Feed from "./pages/Feed";
 import SinglePost from "./pages/SinglePost";
 import Profile from "./pages/Profile";
 import EditProfile from "./pages/EditProfile";
-import Login, { action as loginAction } from "./pages/Login";
+import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Header from "./components/Header";
 
-import isAuthenticatedLoader from "./utils/auth";
+import isAuthenticatedLoader, { isAuthenticated } from "./utils/auth";
 
 const router = createBrowserRouter([
 	{
@@ -20,11 +20,12 @@ const router = createBrowserRouter([
 			},
 			{
 				path: "login",
+				loader: isAuthenticated,
 				element: <Login />,
-				action: loginAction,
 			},
 			{
 				path: "signup",
+				loader: isAuthenticated,
 				element: <Signup />,
 			},
 			{

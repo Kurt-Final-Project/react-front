@@ -1,7 +1,6 @@
 .textInput {
 	display: flex;
 	flex: 1;
-	margin-bottom: 1rem;
 	text-indent: 1rem;
 	padding-right: 1rem;
 	font-size: 1.125rem;
@@ -30,6 +29,5 @@
 }
 
 .errorField {
-	line-height: 0.5rem;
-	margin-bottom: 1rem;
+	margin-block: 0.5rem 0.5rem;
 }

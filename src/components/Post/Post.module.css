@@ -50,8 +50,9 @@
 
 .postContent {
 	margin-bottom: 1rem;
-	font-size: 1.125rem;
+	font-size: 1;
 	min-height: 3rem;
+	word-wrap: break-word;
 }
 
 .timestamp {

@@ -16,7 +16,7 @@
 	flex-direction: column;
 	flex: 1;
 	align-items: center;
-	margin-top: 10rem;
+	align-self: center;
 }
 
 .form {
@@ -67,14 +67,6 @@
 	color: rgba(0, 0, 0, 0.5);
 	font-size: 1.125rem;
 	margin-bottom: 1.5rem;
-}
-
-.errorText {
-	display: flex;
-	align-items: center;
-	column-gap: 0.5rem;
-	color: rgba(255, 0, 0, 0.6);
-	font-size: 1rem;
 }
 
 .linkContainer {

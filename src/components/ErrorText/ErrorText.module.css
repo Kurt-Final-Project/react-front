@@ -1,0 +1,7 @@
+.errorText {
+	display: flex;
+	align-items: center;
+	column-gap: 0.5rem;
+	color: rgba(255, 0, 0, 0.6);
+	font-size: 1rem;
+}

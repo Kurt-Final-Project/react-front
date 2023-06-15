@@ -1,0 +1,22 @@
+.container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	line-height: 1rem;
+	width: 100vw;
+	height: 100vh;
+}
+
+.header {
+	font-size: 4rem;
+}
+
+.midtext,
+.lowtext {
+	font-weight: normal;
+}
+
+.lowtext {
+	color: gray;
+}

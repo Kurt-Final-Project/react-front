@@ -25,11 +25,11 @@ const Tweet = () => {
 					value={textareaValue}
 					onChange={handleTextareaInput}
 					placeholder="What's on your mind?"
-					maxLength={450}
+					maxLength={1000}
 				/>
 			</div>
 			<div className={classes.btn}>
-				<Button btnText={"Post"} />
+				<Button btntext={"Post"} />
 			</div>
 		</div>
 	);

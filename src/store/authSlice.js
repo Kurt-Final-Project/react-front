@@ -7,13 +7,18 @@ const authSlice = createSlice({
 	initialState,
 	reducers: {
 		login(state, action) {
-			const token = action.payload.token;
-			localStorage.setItem("token", token);
+			const { token, expirationDate } = action.payload;
 
-			return { token };
+			console.log(token, expirationDate);
+			localStorage.setItem("token", token);
+			localStorage.setItem("expirationDate", expirationDate);
+
+			return { token, expirationDate };
 		},
 		logout(state) {
 			localStorage.removeItem("token");
+			localStorage.removeItem("expirationDate");
+
 			return { token: null };
 		},
 	},
