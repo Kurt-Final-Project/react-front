@@ -9,7 +9,6 @@ import { Loading } from "../../components/Spinner";
 import DataLoaderComponent from "../../utils/DataLoader";
 import { getUserProfileApi, getAllBlogsApi } from "./api";
 import classes from "./Profile.module.css";
-import bg from "../../assets/blog-bg.svg";
 
 const Profile = () => {
 	const { id } = useParams();
@@ -44,7 +43,6 @@ const Profile = () => {
 		setIsLoadingBlog(true);
 		try {
 			const res = await getAllBlogsApi({ token, id });
-
 			const data = await res.json();
 
 			if (!res.ok) {
@@ -79,7 +77,11 @@ const Profile = () => {
 					return (
 						<React.Fragment>
 							<div className={classes.userContainer}>
-								<img src={bg} alt="profile" className={classes.userImage} />
+								<img
+									src={`${process.env.REACT_APP_BACKEND_URL}/${data.profile_picture_url}`}
+									alt="profile"
+									className={classes.userImage}
+								/>
 							</div>
 							<div className={classes.profileInfo}>
 								<div className={classes.userInfo}>

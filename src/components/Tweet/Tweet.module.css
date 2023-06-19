@@ -1,20 +1,20 @@
 .container {
+	display: flex;
 	border-bottom: var(--outline);
 }
 
 .content {
 	display: flex;
-	align-content: center;
-	align-self: center;
-	gap: 2rem;
+	flex: 1;
+	gap: 1rem;
 	margin-left: 2rem;
 	margin-top: 1rem;
 	cursor: text;
 }
 
 .userImage {
-	height: 5rem;
-	width: 5rem;
+	height: 3rem;
+	width: 3rem;
 	border-radius: 50%;
 }
 
@@ -28,7 +28,7 @@
 	width: 80%;
 	overflow-y: hidden;
 	resize: none;
-	max-height: 30rem;
+	max-height: 40rem;
 }
 
 .message:focus {
@@ -37,7 +37,7 @@
 
 .btn {
 	display: flex;
-	justify-content: flex-end;
+	align-self: flex-end;
 	margin-right: 1rem;
 }
 

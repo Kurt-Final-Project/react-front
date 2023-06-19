@@ -12,7 +12,6 @@ const Feed = () => {
 	const { token } = useSelector((state) => state.auth);
 
 	const getAllBlogs = useCallback(async () => {
-		console.log("trying");
 		try {
 			const res = await fetch(process.env.REACT_APP_BACKEND_URL + "/api/blog", {
 				method: "GET",
@@ -34,13 +33,19 @@ const Feed = () => {
 		}
 	}, [token]);
 
+	const handleFormSubmit = (data) => {
+		setBlogs((prev) => {
+			return [data, ...prev];
+		});
+	};
+
 	useEffect(() => {
 		getAllBlogs();
 	}, [getAllBlogs]);
 
 	return (
 		<div className={classes.container}>
-			<Tweet />
+			<Tweet onSubmit={handleFormSubmit} />
 
 			<Suspense fallback={<p>Loading...</p>}>
 				{blogs.map((data) => {

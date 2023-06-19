@@ -1,6 +1,6 @@
 .buttonPrimary {
-	min-height: 3rem;
-	min-width: 8rem;
+	min-height: 2.5rem;
+	min-width: 6.5rem;
 	border: none;
 	border-radius: 5px;
 	background-color: rgba(25, 100, 255, 1);
@@ -15,7 +15,7 @@
 }
 
 .buttonSecondary {
-	min-height: 3rem;
+	min-height: 2.5rem;
 	min-width: 8rem;
 	border: none;
 	border-radius: 5px;

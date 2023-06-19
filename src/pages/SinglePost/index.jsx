@@ -2,12 +2,12 @@ import React, { useState, useEffect, useCallback, memo } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import Comment from "../../components/Comment";
+import CommentBox from "../../components/CommentBox";
 import { Loading } from "../../components/Spinner";
 import Post from "../../components/Post";
 import ToastContainer, { toaster } from "../../components/Toaster";
 
 import { getSingleBlogApi, getAllCommentsApi } from "./api";
-
 import DataLoaderComponent from "../../utils/DataLoader";
 
 const SinglePost = () => {
@@ -67,6 +67,12 @@ const SinglePost = () => {
 			.catch(() => console.log("An error occured!"));
 	}, [getSingleBlog, getAllComments]);
 
+	const onUserReply = (data) => {
+		setComments((prev) => {
+			return [data, ...prev];
+		});
+	};
+
 	return (
 		<div>
 			<DataLoaderComponent
@@ -76,6 +82,8 @@ const SinglePost = () => {
 			>
 				{(data) => <Post postDetails={data} isSinglePost={true} />}
 			</DataLoaderComponent>
+
+			<CommentBox onSubmit={onUserReply} />
 
 			<DataLoaderComponent
 				mainDependency={comments}

@@ -18,30 +18,24 @@ const Post = ({ postDetails, isSinglePost = false }) => {
 
 	const { token } = useSelector((state) => state.auth);
 	const getLikesAndComments = useCallback(async () => {
-		const urls = [
-			`${process.env.REACT_APP_BACKEND_URL}/api/impression/like/${blog_id}`,
-			`${process.env.REACT_APP_BACKEND_URL}/api/impression/comment/${blog_id}`,
-		];
-
 		try {
-			const [likes, comments] = await Promise.all(
-				urls.map(async (url) => {
-					const res = await fetch(url, {
-						method: "GET",
-						headers: {
-							Authorization: "bearer " + token,
-						},
-					});
+			const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/impression/${blog_id}`, {
+				method: "GET",
+				headers: {
+					Authorization: "bearer " + token,
+				},
+			});
 
-					const data = await res.json();
-					return data;
-				})
-			);
+			const data = await res.json();
 
-			setLikesCount(likes.likes);
-			setCommentsCount(comments.comments.length);
+			if (!res.ok) {
+				throw data;
+			}
+
+			setLikesCount(data.likes);
+			setCommentsCount(data.comments);
 		} catch (err) {
-			throw err;
+			console.log("An error occured!");
 		}
 	}, [blog_id, token]);
 
@@ -56,8 +50,11 @@ const Post = ({ postDetails, isSinglePost = false }) => {
 				<div className={classes.containerContent}>
 					<Link to={postPath} className={classes.linkContainer}>
 						<div className={classes.userContainer}>
-							{/* <img src={user.profile_picture_url} alt="img" className={classes.userImage} /> */}
-							<img src={"http://localhost:8000/public/covers/0.png"} alt="img" className={classes.userImage} />
+							<img
+								src={`${process.env.REACT_APP_BACKEND_URL}/${user.profile_picture_url}`}
+								alt="img"
+								className={classes.userImage}
+							/>
 							<div className={classes.userInfo}>
 								<Link to={`/profile/${user.user_at}`} className={classes.userName}>
 									{user.first_name}

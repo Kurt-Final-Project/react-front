@@ -12,9 +12,15 @@
 }
 
 .userImage {
-	height: 5rem;
-	width: 5rem;
+	height: 3rem;
+	width: 3rem;
 	border-radius: 50%;
+}
+
+.nameContainer {
+	display: flex;
+	gap: 0.5rem;
+	align-items: flex-end;
 }
 
 .userName {
@@ -30,10 +36,13 @@
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	color: black;
 }
 
 .userAt {
 	color: rgb(83, 100, 113);
-	font-size: 0.75rem;
+	font-size: 0.9rem;
+}
+
+.comment {
+	font-size: 1rem;
 }

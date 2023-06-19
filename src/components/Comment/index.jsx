@@ -1,6 +1,7 @@
 import React, { memo } from "react";
 
 import bg from "../../assets/blog-bg.svg";
+import formatDateFromNow from "../../utils/date.helper";
 import classes from "./Comment.module.css";
 
 const Comment = ({ commentDetails }) => {
@@ -14,8 +15,13 @@ const Comment = ({ commentDetails }) => {
 					{/* <img src={user.profile_picture_url} alt="profile" className={classes.userImage} /> */}
 				</div>
 				<div className={classes.userInfo}>
-					<div className={classes.userName}>{`${user.first_name} ${user.last_name}`}</div>
-					<div className={classes.userAt}>{`${user.user_at}`}</div>
+					<div className={classes.nameContainer}>
+						<div className={classes.userName}>{`${user.first_name} ${user.last_name}`}</div>
+						<div className={classes.userAt}>{`@${user.user_at}`}</div>
+						<div className={classes.userAt}>{"ꞏ"}</div>
+						<div className={classes.userAt}>{formatDateFromNow(commentDetails.createdAt)}</div>
+					</div>
+
 					<div className={classes.comment}>{commentDetails.comment}</div>
 				</div>
 			</div>

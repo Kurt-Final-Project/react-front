@@ -1,0 +1,35 @@
+.container {
+	border-bottom: var(--outline);
+	display: flex;
+}
+
+.content {
+	display: flex;
+	flex: 1;
+	padding: 1rem 0 1rem 1rem;
+	gap: 2rem;
+	cursor: text;
+}
+
+.message {
+	all: unset;
+	margin-right: 3rem;
+	text-align: left;
+	font-size: 1.125rem;
+	align-self: center;
+	width: 100%;
+	word-wrap: break-word;
+	overflow: hidden;
+	resize: none;
+	max-height: 10rem;
+}
+
+.message:focus {
+	border: none;
+}
+
+.btn {
+	display: flex;
+	align-self: flex-end;
+	margin-right: 1rem;
+}
