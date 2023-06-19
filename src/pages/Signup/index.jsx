@@ -24,6 +24,7 @@ const Signup = () => {
 			return navigate("/");
 		}
 	};
+
 	return (
 		<div className={classes.container}>
 			<div className={classes.child}>

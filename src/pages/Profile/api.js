@@ -1,0 +1,21 @@
+export const getAllBlogsApi = async ({ token, id }) => {
+	const res = await fetch(process.env.REACT_APP_BACKEND_URL + `/api/blog/user/${id}`, {
+		method: "GET",
+		headers: {
+			Authorization: "bearer " + token,
+		},
+	});
+
+	return res;
+};
+
+export const getUserProfileApi = async ({ token, id }) => {
+	const res = await fetch(process.env.REACT_APP_BACKEND_URL + `/api/user/profile/${id}`, {
+		method: "GET",
+		headers: {
+			Authorization: "bearer " + token,
+		},
+	});
+
+	return res;
+};

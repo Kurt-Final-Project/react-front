@@ -1,3 +1,7 @@
+.container {
+	border-bottom: var(--outline);
+}
+
 .content {
 	display: flex;
 	align-content: center;

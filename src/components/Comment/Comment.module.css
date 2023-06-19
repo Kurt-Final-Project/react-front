@@ -7,7 +7,6 @@
 .userContainer {
 	display: flex;
 	gap: 1rem;
-	justify-content: space-around;
 	margin-top: 1rem;
 	text-align: left;
 }
@@ -22,10 +21,19 @@
 	font-weight: bold;
 }
 
+.userName:hover {
+	text-decoration: underline;
+}
+
 .impression {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 	color: black;
+}
+
+.userAt {
+	color: rgb(83, 100, 113);
+	font-size: 0.75rem;
 }

@@ -1,5 +1,5 @@
 import ErrorText from "../../components/ErrorText";
-import toaster from "../../components/Toaster/toaster";
+import { toaster } from "../../components/Toaster";
 
 const handleUserSubmit = async (values, { setSubmitting, setFieldError, setFieldTouched }) => {
 	setSubmitting(true);

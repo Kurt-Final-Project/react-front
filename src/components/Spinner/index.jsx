@@ -9,4 +9,13 @@ const Spinner = () => {
 	);
 };
 
+export const Loading = ({ loadingText }) => {
+	return (
+		<div className={classes.loading}>
+			<Spinner />
+			<p className={classes.loadingText}>{loadingText}</p>
+		</div>
+	);
+};
+
 export default Spinner;

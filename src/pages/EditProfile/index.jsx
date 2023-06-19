@@ -1,5 +1,4 @@
 import React from "react";
-import { useSubmit } from "react-router-dom";
 import { Formik, Form } from "formik";
 import { MdError } from "react-icons/md";
 import Input from "../../components/Input";
@@ -8,8 +7,6 @@ import File from "../../components/File";
 import classes from "../EditProfile/EditProfile.module.css";
 
 const EditProfile = () => {
-	const submit = useSubmit();
-
 	return (
 		<div className={classes.containerEdit}>
 			<Formik
@@ -65,8 +62,6 @@ const EditProfile = () => {
 				}}
 				onSubmit={(values, { setSubmitting }) => {
 					setTimeout(() => {
-						console.log(values);
-
 						setSubmitting(false);
 					}, 400);
 				}}
@@ -78,14 +73,35 @@ const EditProfile = () => {
 						</div>
 
 						<div className={classes.fieldName}>
-							<Input type="text" name="firstname" placeholder="First Name" isInvalidField={errors.firstname && touched.firstname} />
-							<Input type="text" name="lastname" placeholder="Last Name" isInvalidField={errors.lastname && touched.lastname} />
+							<Input
+								type="text"
+								name="firstname"
+								placeholder="First Name"
+								isInvalidField={errors.firstname && touched.firstname}
+							/>
+							<Input
+								type="text"
+								name="lastname"
+								placeholder="Last Name"
+								isInvalidField={errors.lastname && touched.lastname}
+							/>
 						</div>
 
 						<div className={classes.fieldName}>
 							<File type="file" name="image" placeholder="File" isInvalidField={errors.image && touched.image} />
-							<Input type="text" name="username" placeholder="Username" isInvalidField={errors.username && touched.username} />
-							<Input type="date" name="birthdate" placeholder="Birthday" isInvalidField={errors.birthdate && touched.birthdate} />
+							<Input
+								type="text"
+								name="username"
+								placeholder="Username"
+								isInvalidField={errors.username && touched.username}
+							/>
+							<div className={classes.birthText}>Birthday</div>
+							<Input
+								type="date"
+								name="birthdate"
+								placeholder="Birthday"
+								isInvalidField={errors.birthdate && touched.birthdate}
+							/>
 						</div>
 
 						<button type="submit" disabled={isSubmitting} className={classes.btnSubmit}>

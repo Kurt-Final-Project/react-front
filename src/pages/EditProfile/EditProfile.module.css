@@ -76,3 +76,9 @@
 	font-weight: bold;
 	text-align: center;
 }
+
+.birthText {
+	text-align: left;
+	font-size: 1.125rem;
+	color: gray;
+}

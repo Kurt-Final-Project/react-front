@@ -1,0 +1,10 @@
+.impression {
+	display: flex;
+	margin: 0.5rem 0;
+	column-gap: 2.5rem;
+	color: rgb(83, 100, 113);
+}
+
+.like {
+	flex: 1;
+}

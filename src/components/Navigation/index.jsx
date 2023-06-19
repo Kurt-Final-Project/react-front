@@ -1,7 +1,7 @@
 import React from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { CgFeed } from "react-icons/cg";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { authActions } from "../../store/authSlice";
 
 // import { MdOutlineTravelExplore } from "react-icons/md";
@@ -10,6 +10,8 @@ import { RiLogoutCircleLine } from "react-icons/ri";
 import classes from "./Navigation.module.css";
 
 const Navigation = () => {
+	const { user_at } = useSelector((state) => state.auth);
+
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 
@@ -53,7 +55,7 @@ const Navigation = () => {
 						</div>
 					</NavLink> */}
 					<NavLink
-						to={"/profile/1"}
+						to={`/profile/${user_at}`}
 						className={classes.linkItem}
 						style={({ isActive, isPending }) => {
 							return {
