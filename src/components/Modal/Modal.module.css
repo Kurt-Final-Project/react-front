@@ -1,0 +1,17 @@
+.dialogContainer {
+	border: var(--outline);
+	border-radius: 1rem;
+	min-width: 30rem;
+	max-width: 30rem;
+	min-height: 30rem;
+}
+
+.btn {
+	flex: 1;
+}
+
+.btnContainer {
+	bottom: 1rem;
+	display: flex;
+	gap: 1rem;
+}

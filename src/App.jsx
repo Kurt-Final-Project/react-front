@@ -9,6 +9,7 @@ import Signup from "./pages/Signup";
 import Header from "./components/Header";
 
 import isAuthenticatedLoader, { isAuthenticated } from "./utils/auth";
+import ProfilePicture from "./components/ProfilePicture";
 
 const router = createBrowserRouter([
 	{
@@ -49,6 +50,10 @@ const router = createBrowserRouter([
 						element: <EditProfile />,
 					},
 				],
+			},
+			{
+				path: "/sample",
+				element: <ProfilePicture />,
 			},
 			{
 				path: "feed",

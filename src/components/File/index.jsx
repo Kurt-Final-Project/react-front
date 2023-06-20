@@ -1,24 +1,32 @@
-import React from "react";
-import { Field, ErrorMessage, useFormikContext } from "formik";
+import React, { useState } from "react";
 import classes from "./File.module.css";
 
 const File = (props) => {
-	const { values } = useFormikContext();
-	const selectedImageText = values.image.split("\\").at(-1);
+	const [selectedFile, setSelectedFile] = useState(null);
+	const [imageUrl, setImageUrl] = useState("");
 
-	const classNames = classes.fileContainer;
-	const isValidInputClassName = !props.isInvalidField ? classNames : classNames + " " + classes.invalid;
+	const { selectedFileHandler, ...newProps } = { ...props };
 
-	const { isInvalidField, ...newProps } = { ...props };
+	const onFileChangeHandler = (e) => {
+		const file = e.target.files[0];
+		if (file) {
+			setSelectedFile(file);
+			setImageUrl(URL.createObjectURL(file));
+			selectedFileHandler(file);
+		}
+	};
 
 	return (
 		<div className={classes.perField}>
-			<div className={isValidInputClassName} style={{ color: selectedImageText ? "black" : "" }}>
-				{!selectedImageText ? "Upload Image" : selectedImageText}
+			<div className={classes.fileContainer}>
+				{selectedFile?.name ? (
+					<img src={imageUrl} alt="profile_picture" className={classes.imageContainer} />
+				) : (
+					"Upload Image"
+				)}
 				<button className={classes.textInput} type="button"></button>
-				<Field {...newProps} />
+				<input {...newProps} onChange={onFileChangeHandler} accept=".png, .jpg, .jpeg" />
 			</div>
-			<div className={classes.errorField}>{!isInvalidField ? <div>&nbsp;</div> : <ErrorMessage name={props.name} component="div" />}</div>
 		</div>
 	);
 };

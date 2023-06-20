@@ -1,7 +1,7 @@
 import React, { useState, useEffect, Suspense, useCallback, lazy } from "react";
 import { useSelector } from "react-redux";
 import Tweet from "../../components/Tweet";
-import ToastContainer, { toaster } from "../../components/Toaster";
+import { toaster } from "../../components/Toaster";
 
 import classes from "./Feed.module.css";
 
@@ -29,7 +29,7 @@ const Feed = () => {
 
 			setBlogs(data.blogs);
 		} catch (err) {
-			throw err;
+			console.log("An error occured.");
 		}
 	}, [token]);
 
@@ -52,7 +52,6 @@ const Feed = () => {
 					return <Post postDetails={data} key={data._id} />;
 				})}
 			</Suspense>
-			<ToastContainer />
 		</div>
 	);
 };

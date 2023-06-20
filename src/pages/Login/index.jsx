@@ -2,7 +2,6 @@ import React from "react";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
 import ErrorText from "../../components/ErrorText";
-import ToasterContainer from "../../components/Toaster";
 
 import { Formik, Form } from "formik";
 import { NavLink, useNavigate } from "react-router-dom";
@@ -79,7 +78,6 @@ const Login = () => {
 					)}
 				</Formik>
 			</div>
-			<ToasterContainer />
 		</div>
 	);
 };

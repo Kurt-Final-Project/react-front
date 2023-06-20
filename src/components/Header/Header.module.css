@@ -23,6 +23,7 @@
 	outline: var(--outline);
 	backdrop-filter: blur(5px);
 	text-align: left;
+	z-index: 10;
 }
 
 .headerText {

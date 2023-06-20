@@ -1,6 +1,7 @@
 import React, { useState, useCallback } from "react";
 import { useSelector } from "react-redux";
 import Button from "../Button";
+import TextArea from "../TextArea";
 import { toaster } from "../Toaster";
 
 import { postCommentApi } from "./api";
@@ -11,15 +12,11 @@ const Tweet = ({ onSubmit }) => {
 	const [textareaValue, setTextareaValue] = useState("");
 	const [isLoading, setIsLoading] = useState(false);
 
-	const handleTextareaInput = (event) => {
-		setTextareaValue(event.target.value);
-		event.target.style.height = "auto";
-		event.target.style.height = event.target.scrollHeight + "px";
-	};
-
 	const onPostHandler = useCallback(
 		async (e) => {
 			e.preventDefault();
+			if (textareaValue.length < 5) return;
+
 			setIsLoading(true);
 			try {
 				const res = await postCommentApi({ token, description: textareaValue });
@@ -49,16 +46,16 @@ const Tweet = ({ onSubmit }) => {
 					alt="img"
 					className={classes.userImage}
 				/>
-				<textarea
+				<TextArea
 					className={classes.message}
-					value={textareaValue}
-					onChange={handleTextareaInput}
 					placeholder="What's on your mind?"
 					maxLength={1000}
+					textValue={(val) => setTextareaValue(val)}
+					value={textareaValue}
 				/>
 			</div>
 			<div className={classes.btn}>
-				<Button btntext={"Post"} type="submit" disabled={isLoading} />
+				<Button btntext={"Post"} type="submit" disabled={isLoading} btntype="primary" />
 			</div>
 		</form>
 	);

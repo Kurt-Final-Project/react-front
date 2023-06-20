@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import Post from "../../components/Post";
 import Button from "../../components/Button";
-import ToasterContainer, { toaster } from "../../components/Toaster";
+import { toaster } from "../../components/Toaster";
 import { Loading } from "../../components/Spinner";
 
 import DataLoaderComponent from "../../utils/DataLoader";
@@ -112,12 +112,11 @@ const Profile = () => {
 				{(data) => {
 					return data.length > 0
 						? data.map((blog) => {
-								return <Post postDetails={blog} />;
+								return <Post postDetails={blog} key={blog._id} />;
 						  })
 						: !data.length && user && <div className={classes.noBlogs}>No blogs found</div>;
 				}}
 			</DataLoaderComponent>
-			<ToasterContainer />
 		</div>
 	);
 };

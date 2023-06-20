@@ -43,6 +43,7 @@
 }
 
 .userName:hover {
+	cursor: pointer;
 	text-decoration: underline;
 }
 
@@ -50,6 +51,7 @@
 	all: unset;
 	font-size: 0.9rem;
 	color: rgb(83, 100, 113);
+	cursor: pointer;
 }
 
 .postContent {

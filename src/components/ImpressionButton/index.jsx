@@ -1,15 +1,34 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
+import { toaster } from "../Toaster";
 
+import { getImpressionsApi } from "./api";
 import { VscComment } from "react-icons/vsc";
 import { AiOutlineLike, AiFillLike } from "react-icons/ai";
 import classes from "./ImpressionButton.module.css";
 
-const ImpressionButton = ({ type, isLiked }) => {
-	const onClickLikeHandler = () => {
-		setIsUserLiked((prev) => !prev);
-	};
-
+const ImpressionButton = ({ type, isLiked, blog_id, updateCount }) => {
 	const [isUserLiked, setIsUserLiked] = useState(isLiked);
+	const { token } = useSelector((state) => state.auth);
+
+	const onClickLikeHandler = async () => {
+		setIsUserLiked((prev) => !prev);
+		try {
+			const res = await getImpressionsApi({ token, body: { blog_id, isLiking: !isUserLiked } });
+
+			const data = await res.json();
+
+			if (!res.ok) {
+				toaster.error(data.message);
+				throw data;
+			}
+
+			if (!isUserLiked) updateCount(1);
+			else updateCount(-1);
+		} catch (err) {
+			console.log("An error occured.", err);
+		}
+	};
 
 	let buttonType = (
 		<div className={classes.iconContainer}>

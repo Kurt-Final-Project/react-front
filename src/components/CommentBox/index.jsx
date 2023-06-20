@@ -6,6 +6,7 @@ import { toaster } from "../Toaster";
 
 import { postReplyApi } from "./api";
 import classes from "./CommentBox.module.css";
+import TextArea from "../TextArea";
 
 const CommentBox = ({ onSubmit }) => {
 	const { token } = useSelector((state) => state.auth);
@@ -14,15 +15,10 @@ const CommentBox = ({ onSubmit }) => {
 	const [textareaValue, setTextareaValue] = useState("");
 	const [isLoading, setIsLoading] = useState(false);
 
-	const handleTextareaInput = (event) => {
-		setTextareaValue(event.target.value);
-		event.target.style.height = "auto";
-		event.target.style.height = event.target.scrollHeight + "px";
-	};
-
 	const onReplyHandler = useCallback(
 		async (e) => {
 			e.preventDefault();
+			if (textareaValue.length < 1) return;
 			setIsLoading(true);
 			try {
 				const res = await postReplyApi({ token, comment: textareaValue, blog_id: id });
@@ -47,16 +43,16 @@ const CommentBox = ({ onSubmit }) => {
 	return (
 		<form className={classes.container} onSubmit={onReplyHandler}>
 			<div className={classes.content}>
-				<textarea
+				<TextArea
 					className={classes.message}
-					value={textareaValue}
-					onChange={handleTextareaInput}
 					placeholder="Reply"
 					maxLength={300}
+					textValue={(val) => setTextareaValue(val)}
+					value={textareaValue}
 				/>
 			</div>
 			<div className={classes.btn}>
-				<Button btntext={"Reply"} type="submit" disabled={isLoading} />
+				<Button btntext={"Reply"} type="submit" disabled={isLoading} btntype="primary" />
 			</div>
 		</form>
 	);

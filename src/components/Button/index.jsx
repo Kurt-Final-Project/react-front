@@ -3,9 +3,9 @@ import classes from "./Button.module.css";
 
 import Spinner from "../Spinner";
 
-const Button = (props, { type = "primary" }) => {
+const Button = (props) => {
 	const btnType =
-		type === "primary"
+		props.btntype === "primary"
 			? `${props.className} ${classes.buttonPrimary}`
 			: `${props.className} ${classes.buttonSecondary}`;
 

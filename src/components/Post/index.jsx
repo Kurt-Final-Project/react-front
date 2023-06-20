@@ -9,15 +9,19 @@ import formatDateFromNow from "../../utils/date.helper";
 const Impressions = lazy(() => import("../Impression"));
 
 const Post = ({ postDetails, isSinglePost = false }) => {
+	const [isLiked, setIsLiked] = useState(false);
 	const [likesCount, setLikesCount] = useState(0);
 	const [commentsCount, setCommentsCount] = useState(0);
+	const [isLoading, setIsLoading] = useState(false);
 
 	const classNames = isSinglePost ? classes.container : `${classes.container} ${classes.containerEffect}`;
 	const blog_id = postDetails._id;
 	const postPath = `/feed/${blog_id}`;
 
 	const { token } = useSelector((state) => state.auth);
+
 	const getLikesAndComments = useCallback(async () => {
+		setIsLoading(true);
 		try {
 			const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/impression/${blog_id}`, {
 				method: "GET",
@@ -32,9 +36,12 @@ const Post = ({ postDetails, isSinglePost = false }) => {
 				throw data;
 			}
 
+			setIsLoading(false);
+			setIsLiked(data.isLiked);
 			setLikesCount(data.likes);
 			setCommentsCount(data.comments);
 		} catch (err) {
+			setIsLoading(false);
 			console.log("An error occured!");
 		}
 	}, [blog_id, token]);
@@ -44,17 +51,45 @@ const Post = ({ postDetails, isSinglePost = false }) => {
 	}, [getLikesAndComments]);
 
 	const user = postDetails.user_id;
+
+	const PostContainer = ({ isSingular, children }) => {
+		const render = isSingular ? (
+			<div className={classes.linkContainer}>{children}</div>
+		) : (
+			<Link to={postPath} className={classes.linkContainer}>
+				{children}
+			</Link>
+		);
+
+		return render;
+	};
+
+	const CommentButton = ({ isSingular }) => {
+		const render = !isSingular ? (
+			<Link to={postPath} className={classes.comment}>
+				<ImpressionButton type={"comment"} />
+			</Link>
+		) : (
+			<div className={classes.comment} style={{ cursor: "none" }}>
+				<ImpressionButton type={"comment"} />
+			</div>
+		);
+
+		return render;
+	};
+
 	return (
 		<div>
 			<div className={classNames}>
 				<div className={classes.containerContent}>
-					<Link to={postPath} className={classes.linkContainer}>
+					<PostContainer isSingular={isSinglePost}>
 						<div className={classes.userContainer}>
 							<img
 								src={`${process.env.REACT_APP_BACKEND_URL}/${user.profile_picture_url}`}
 								alt="img"
 								className={classes.userImage}
 							/>
+
 							<div className={classes.userInfo}>
 								<Link to={`/profile/${user.user_at}`} className={classes.userName}>
 									{user.first_name}
@@ -66,20 +101,28 @@ const Post = ({ postDetails, isSinglePost = false }) => {
 						</div>
 
 						<div className={classes.postContent}>{postDetails.description}</div>
-
 						<div className={classes.timestamp}>{formatDateFromNow(postDetails.updatedAt)}</div>
-					</Link>
+					</PostContainer>
 					<hr />
-					<Suspense fallback={<p>Fetching impressions...</p>}>
-						<Impressions likesCount={likesCount} commentsCount={commentsCount} />
-						<hr />
-						<div className={classes.impressionButtons}>
-							<ImpressionButton className={classes.like} type="like" isLiked={false} />
-							<Link to={postPath} className={classes.comment}>
-								<ImpressionButton type={"comment"} />
-							</Link>
-						</div>
-					</Suspense>
+
+					{!isLoading ? (
+						<React.Fragment>
+							<Impressions likesCount={likesCount} commentsCount={commentsCount} />
+							<hr />
+							<div className={classes.impressionButtons}>
+								<ImpressionButton
+									className={classes.like}
+									type="like"
+									isLiked={isLiked}
+									blog_id={blog_id}
+									updateCount={(val) => setLikesCount((prev) => prev + val)}
+								/>
+								<CommentButton isSingular={isSinglePost} />
+							</div>
+						</React.Fragment>
+					) : (
+						<p>Fetching impressions...</p>
+					)}
 				</div>
 			</div>
 		</div>
