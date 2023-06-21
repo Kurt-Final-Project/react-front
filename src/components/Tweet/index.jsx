@@ -33,6 +33,7 @@ const Tweet = ({ onSubmit }) => {
 				toaster.success(data.message);
 			} catch (err) {
 				setIsLoading(false);
+				console.log("An error occured.", err);
 			}
 		},
 		[onSubmit, textareaValue, token]
@@ -55,7 +56,13 @@ const Tweet = ({ onSubmit }) => {
 				/>
 			</div>
 			<div className={classes.btn}>
-				<Button btntext={"Post"} type="submit" disabled={isLoading} btntype="primary" />
+				<Button
+					btntext={"Post"}
+					type="submit"
+					disabled={isLoading || textareaValue.length < 5}
+					btntype="primary"
+					isfor="tweet"
+				/>
 			</div>
 		</form>
 	);

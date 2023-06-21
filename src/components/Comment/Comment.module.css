@@ -1,7 +1,7 @@
 .commentContainer {
 	text-align: left;
 	margin-left: 1rem;
-	margin-right: 1rem;
+	margin-right: 1.5rem;
 }
 
 .userContainer {
@@ -24,11 +24,15 @@
 }
 
 .userName {
+	all: unset;
 	font-weight: bold;
 }
 
 .userName:hover {
+	all: unset;
+	font-weight: bold;
 	text-decoration: underline;
+	cursor: pointer;
 }
 
 .impression {
@@ -45,4 +49,23 @@
 
 .comment {
 	font-size: 1rem;
+}
+
+.deleteHeading {
+	font-size: 1.5rem;
+	font-weight: bold;
+	margin: 0;
+}
+
+.subText {
+	color: rgba(0, 0, 0, 0.6);
+	margin-bottom: 2rem;
+}
+
+.modalContent {
+	text-align: left;
+}
+
+.userOption {
+	margin-left: auto;
 }

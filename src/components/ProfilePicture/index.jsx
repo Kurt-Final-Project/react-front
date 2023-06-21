@@ -36,7 +36,7 @@ const ProfilePicture = ({ src }) => {
 			toaster.success(data.message);
 		} catch (err) {
 			setIsSubmitting(false);
-			console.log("An error occured.");
+			console.log("An error occured.", err);
 		}
 	};
 
@@ -49,7 +49,7 @@ const ProfilePicture = ({ src }) => {
 				</div>
 			</button>
 
-			<Modal onDialogSubmit={onDialogSubmit} isSubmitting={isSubmitting} ref={dialogBox}>
+			<Modal onDialogSubmit={onDialogSubmit} isSubmitting={isSubmitting} dialogSubmitText={"Save"} ref={dialogBox}>
 				<File type="file" selectedFileHandler={(file) => setPicture(file)} />
 			</Modal>
 		</div>

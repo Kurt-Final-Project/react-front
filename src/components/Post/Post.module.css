@@ -1,5 +1,6 @@
 .linkContainer {
 	all: unset;
+	background-color: red;
 }
 
 .container {
@@ -55,7 +56,6 @@
 }
 
 .postContent {
-	cursor: text;
 	margin-bottom: 1rem;
 	font-size: 1;
 	min-height: 3rem;
@@ -91,4 +91,19 @@ span {
 	all: unset;
 	display: flex;
 	flex: 1;
+}
+
+.deleteHeading {
+	font-size: 1.5rem;
+	font-weight: bold;
+	margin: 0;
+}
+
+.subText {
+	color: rgba(0, 0, 0, 0.6);
+	margin-bottom: 2rem;
+}
+
+.modalContent {
+	text-align: left;
 }

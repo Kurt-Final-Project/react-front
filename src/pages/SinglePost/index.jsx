@@ -44,7 +44,6 @@ const SinglePost = () => {
 		setIsCommentLoading(true);
 		try {
 			const res = await getAllCommentsApi({ token, id });
-
 			const data = await res.json();
 
 			if (!res.ok) {
@@ -64,13 +63,18 @@ const SinglePost = () => {
 	useEffect(() => {
 		getSingleBlog()
 			.then(() => getAllComments())
-			.catch(() => console.log("An error occured!"));
+			.catch((err) => console.log("An error occured.", err));
 	}, [getSingleBlog, getAllComments]);
 
 	const onUserReply = (data) => {
 		setComments((prev) => {
 			return [data, ...prev];
 		});
+	};
+
+	const onDeleteCommentHandler = (comment_id) => {
+		const filterComment = comments.filter((comment) => comment._id !== comment_id);
+		setComments(filterComment);
 	};
 
 	return (
@@ -92,7 +96,14 @@ const SinglePost = () => {
 			>
 				{(data) =>
 					data.map((comment) => {
-						return <Comment key={comment._id} commentDetails={comment} />;
+						return (
+							<Comment
+								key={comment._id}
+								blog_id={id}
+								commentDetails={comment}
+								onDeleteCommentHandler={onDeleteCommentHandler}
+							/>
+						);
 					})
 				}
 			</DataLoaderComponent>

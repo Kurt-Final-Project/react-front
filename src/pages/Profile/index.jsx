@@ -12,13 +12,15 @@ import classes from "./Profile.module.css";
 
 const Profile = () => {
 	const { id } = useParams();
-	const { token, user_at } = useSelector((state) => state.auth);
+	const { token, user: user_id } = useSelector((state) => state.auth);
 
 	const [user, setUserProfile] = useState();
 	const [isLoadingUser, setIsLoadingUser] = useState(false);
 
 	const [blogs, setBlogs] = useState([]);
 	const [isLoadingBlog, setIsLoadingBlog] = useState(false);
+	const [page, setPage] = useState(1);
+	const [hasMore, setHasMore] = useState(true);
 
 	const getUserProfile = useCallback(async () => {
 		setIsLoadingUser(true);
@@ -42,7 +44,7 @@ const Profile = () => {
 	const getAllBlogs = useCallback(async () => {
 		setIsLoadingBlog(true);
 		try {
-			const res = await getAllBlogsApi({ token, id });
+			const res = await getAllBlogsApi({ token, id, page });
 			const data = await res.json();
 
 			if (!res.ok) {
@@ -50,21 +52,35 @@ const Profile = () => {
 				throw data;
 			}
 
-			setBlogs(data.blogs);
+			setBlogs((prev) => [...prev, ...data.blogs]);
+			setHasMore(data.hasMore);
 			setIsLoadingBlog(false);
 		} catch (err) {
 			setIsLoadingBlog(false);
 			throw err;
 		}
-	}, [token, id]);
+	}, [token, id, page]);
 
 	useEffect(() => {
 		getUserProfile()
 			.then(() => getAllBlogs())
-			.catch(() => {
-				console.log("An error occured!");
+			.catch((err) => {
+				console.log("An error occured.", err);
 			});
-	}, [getUserProfile, getAllBlogs]);
+	}, [getUserProfile, getAllBlogs, page]);
+
+	const handleScroll = useCallback(() => {
+		if (window.innerHeight + document.documentElement.scrollTop === document.documentElement.offsetHeight && hasMore) {
+			setPage((prevPage) => prevPage + 1);
+		}
+	}, [hasMore]);
+
+	useEffect(() => {
+		window.addEventListener("scroll", handleScroll);
+		return () => {
+			window.removeEventListener("scroll", handleScroll);
+		};
+	}, [handleScroll]);
 
 	return (
 		<div className={classes.container}>
@@ -92,7 +108,7 @@ const Profile = () => {
 										Account Created: {new Date(data.createdAt).toLocaleDateString()}
 									</div>
 								</div>
-								{user_at === id && (
+								{user_id === id && (
 									<Link to={"/edit-profile"}>
 										<Button className={classes.btnEdit} btntext={"Edit Profile"} />
 									</Link>

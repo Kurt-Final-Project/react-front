@@ -8,20 +8,22 @@ import ProfilePicture from "../../components/ProfilePicture";
 import { Loading } from "../../components/Spinner";
 import { toaster } from "../../components/Toaster";
 
-import { getUserDetailsApi, updateUserDetailsApi } from "./api";
+import { getUserDetailsApi, updateUserDetailsApi, updateUserPasswordApi } from "./api";
 import classes from "../EditProfile/EditProfile.module.css";
+import Button from "../../components/Button";
 
 const EditProfile = () => {
-	const { token, user_at } = useSelector((state) => state.auth);
+	const { token, user: user_id } = useSelector((state) => state.auth);
 	const [userDetails, setUserDetails] = useState(null);
 	const [isUserLoading, setIsUserLoading] = useState(false);
 
 	const getUserProfile = useCallback(async () => {
 		setIsUserLoading(true);
 		try {
-			const res = await getUserDetailsApi({ token, user_at });
+			const res = await getUserDetailsApi({ token, user_id });
 			const data = await res.json();
 
+			console.log(res);
 			if (!res.ok) {
 				throw data.message;
 			}
@@ -30,9 +32,9 @@ const EditProfile = () => {
 			setIsUserLoading(false);
 		} catch (err) {
 			setIsUserLoading(false);
-			console.log(err);
+			console.log("An error occured.", err);
 		}
-	}, [token, user_at]);
+	}, [token, user_id]);
 
 	const updateUserDetails = async (values, { setSubmitting, setFieldError, setFieldTouched }) => {
 		try {
@@ -57,7 +59,37 @@ const EditProfile = () => {
 			toaster.success(data.message);
 			return data;
 		} catch (err) {
-			console.log("An error occured!");
+			setSubmitting(false);
+			console.log("An error occured.", err);
+		}
+	};
+
+	const updateUserPassword = async (values, { setSubmitting, resetForm, setFieldError, setFieldTouched }) => {
+		try {
+			const res = await updateUserPasswordApi({ token, values });
+			const data = await res.json();
+
+			if (res.status === 422) {
+				setFieldError(data.field, <ErrorText>{data.message}</ErrorText>);
+				setFieldTouched(data.field, true, false);
+				toaster.error(data.message);
+				throw data;
+			} else if (res.status === 403) {
+				setFieldError("user_at", <ErrorText>{data.message}</ErrorText>);
+				setFieldTouched("user_at", true, false);
+				toaster.error(data.message);
+				throw data;
+			} else if (!res.ok) {
+				throw data;
+			}
+
+			setSubmitting(false);
+			resetForm();
+			toaster.success(data.message);
+			return data;
+		} catch (err) {
+			setSubmitting(false);
+			console.log("An error occured.", err);
 		}
 	};
 
@@ -78,8 +110,8 @@ const EditProfile = () => {
 									first_name: data.first_name,
 									last_name: data.last_name,
 									user_at: data.user_at,
-									bio: data.bio,
-									birthday: new Date(data.birthday).toISOString().slice(0, 10),
+									bio: data?.bio,
+									birthday: data?.birthday && new Date(data.birthday).toISOString().slice(0, 10),
 								}}
 								validate={(values) => {
 									const errors = {};
@@ -135,9 +167,12 @@ const EditProfile = () => {
 											isInvalidField={errors.birthday && touched.birthday}
 										/>
 
-										<button type="submit" disabled={isSubmitting} className={classes.btnSubmit}>
-											Apply Changes
-										</button>
+										<Button
+											type="submit"
+											disabled={isSubmitting}
+											className={classes.btnSubmit}
+											btntext={"Apply Changes"}
+										/>
 									</Form>
 								)}
 							</Formik>
@@ -145,6 +180,75 @@ const EditProfile = () => {
 					);
 				}}
 			</DataLoaderComponent>
+
+			<React.Fragment>
+				<Formik
+					initialValues={{
+						password: "",
+						oldPassword: "",
+						confirmPassword: "",
+					}}
+					validate={(values) => {
+						const errors = {};
+						if (values.password < 8) {
+							errors.password = <ErrorText>Password must be at least 8 characters</ErrorText>;
+						}
+
+						if (!/^[a-zA-Z0-9!@#.+-^/]*$/i.test(values.password)) {
+							errors.password = <ErrorText>Password contains unsupported characters</ErrorText>;
+						}
+
+						if (!values.password) {
+							errors.password = <ErrorText>Required</ErrorText>;
+						}
+
+						if (!values.oldPassword) {
+							errors.oldPassword = <ErrorText>Required</ErrorText>;
+						}
+
+						if (!values.confirmPassword) {
+							errors.confirmPassword = <ErrorText>Required</ErrorText>;
+						}
+
+						if (values.password !== values.confirmPassword) {
+							errors.confirmPassword = <ErrorText>Password does not match</ErrorText>;
+						}
+
+						return errors;
+					}}
+					onSubmit={updateUserPassword}
+				>
+					{({ isSubmitting, errors, touched }) => (
+						<Form className={classes.form}>
+							<div className={classes.formText}>
+								<h1 classes={classes.headingText}>Change Password</h1>
+							</div>
+							<Input
+								type="password"
+								name="oldPassword"
+								placeholder="Old Password"
+								isInvalidField={errors.oldPassword && touched.oldPassword}
+							/>
+
+							<Input
+								type="password"
+								name="password"
+								placeholder="New Password"
+								isInvalidField={errors.password && touched.password}
+							/>
+
+							<Input
+								type="password"
+								name="confirmPassword"
+								placeholder="Confirm Password"
+								isInvalidField={errors.confirmPassword && touched.confirmPassword}
+							/>
+
+							<Button type="submit" disabled={isSubmitting} className={classes.btnSubmit} btntext={"Change Password"} />
+						</Form>
+					)}
+				</Formik>
+			</React.Fragment>
 		</div>
 	);
 };

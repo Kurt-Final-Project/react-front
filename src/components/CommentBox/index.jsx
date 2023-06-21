@@ -35,6 +35,7 @@ const CommentBox = ({ onSubmit }) => {
 				toaster.success(data.message);
 			} catch (err) {
 				setIsLoading(false);
+				console.log("An error occured.", err);
 			}
 		},
 		[onSubmit, token, textareaValue, id]

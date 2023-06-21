@@ -8,12 +8,13 @@
 	text-align: center;
 	width: 50rem;
 	outline: var(--outline);
-	overflow: auto;
 	min-height: 100vh;
 }
 
 .container {
 	display: flex;
+	align-items: flex-start;
+	overflow: none;
 }
 
 .header {

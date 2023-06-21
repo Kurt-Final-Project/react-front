@@ -11,7 +11,7 @@ const Button = (props) => {
 
 	return (
 		<button {...props} className={btnType}>
-			{props.disabled ? <Spinner /> : props.btntext}
+			{props.disabled && props.isfor === "tweet" ? props.btntext : props.disabled ? <Spinner /> : props.btntext}
 		</button>
 	);
 };

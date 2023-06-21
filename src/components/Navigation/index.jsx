@@ -10,7 +10,7 @@ import { RiLogoutCircleLine } from "react-icons/ri";
 import classes from "./Navigation.module.css";
 
 const Navigation = () => {
-	const { user_at } = useSelector((state) => state.auth);
+	const { user } = useSelector((state) => state.auth);
 
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
@@ -55,7 +55,7 @@ const Navigation = () => {
 						</div>
 					</NavLink> */}
 					<NavLink
-						to={`/profile/${user_at}`}
+						to={`/profile/${user}`}
 						className={classes.linkItem}
 						style={({ isActive, isPending }) => {
 							return {
