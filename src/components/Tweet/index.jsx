@@ -8,7 +8,7 @@ import { postCommentApi } from "./api";
 import classes from "./Tweet.module.css";
 
 const Tweet = ({ onSubmit }) => {
-	const { token } = useSelector((state) => state.auth);
+	const { token, profile_picture_url } = useSelector((state) => state.auth);
 	const [textareaValue, setTextareaValue] = useState("");
 	const [isLoading, setIsLoading] = useState(false);
 
@@ -43,7 +43,7 @@ const Tweet = ({ onSubmit }) => {
 		<form className={classes.container} onSubmit={onPostHandler}>
 			<div className={classes.content}>
 				<img
-					src="https://images.unsplash.com/photo-1575936123452-b67c3203c357?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8aW1hZ2V8ZW58MHx8MHx8fDA%3D&w=1000&q=80"
+					src={`${process.env.REACT_APP_BACKEND_URL}/${profile_picture_url}`}
 					alt="img"
 					className={classes.userImage}
 				/>

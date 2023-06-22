@@ -1,5 +1,6 @@
 import React, { useRef, useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { authActions } from "../../store/authSlice";
 import File from "../File";
 import Modal from "../Modal";
 import { toaster } from "../Toaster";
@@ -10,6 +11,7 @@ import classes from "./ProfilePicture.module.css";
 
 const ProfilePicture = ({ src }) => {
 	const dialogBox = useRef();
+	const dispatch = useDispatch();
 
 	const [initialPicture, setInitialPicture] = useState(src);
 	const [picture, setPicture] = useState(null);
@@ -34,6 +36,7 @@ const ProfilePicture = ({ src }) => {
 			setIsSubmitting(false);
 			setInitialPicture(URL.createObjectURL(picture));
 			toaster.success(data.message);
+			dispatch(authActions.changeProfile({ profile_picture_url: data.newPicture }));
 		} catch (err) {
 			setIsSubmitting(false);
 			console.log("An error occured.", err);
