@@ -17,7 +17,7 @@ const formatDateFromNow = (date) => {
 		formattedTime = `${hours} hours ago`;
 	} else if (minutes >= 1) {
 		formattedTime = `${minutes} minutes ago`;
-	} else formattedTime = `${seconds} seconds ago`;
+	} else formattedTime = `${Math.abs(seconds)} seconds ago`;
 
 	return formattedTime;
 };

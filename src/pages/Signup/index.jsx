@@ -44,8 +44,8 @@ const Signup = () => {
 
 						if (!values.user_at) {
 							errors.user_at = <ErrorText>Required</ErrorText>;
-						} else if (!/^[\w.-]+$/.test(values.user_at)) {
-							errors.user_at = <ErrorText>Username must only contain alphanumeric characters</ErrorText>;
+						} else if (!/^[a-zA-Z0-9.\-_]+$/.test(values.user_at)) {
+							errors.user_at = <ErrorText>Username must only contain alphanumeric characters and -._</ErrorText>;
 						}
 
 						const maxCharacters = 8;
@@ -63,8 +63,16 @@ const Signup = () => {
 							errors.first_name = <ErrorText>Required</ErrorText>;
 						}
 
+						if (!/^[a-zA-Z]+$/.test(values.first_name)) {
+							errors.first_name = <ErrorText>Name must only contain letters</ErrorText>;
+						}
+
 						if (!values.last_name) {
 							errors.last_name = <ErrorText>Required</ErrorText>;
+						}
+
+						if (!/^[a-zA-Z]+$/.test(values.last_name)) {
+							errors.last_name = <ErrorText>Name must only contain letters</ErrorText>;
 						}
 
 						return errors;
