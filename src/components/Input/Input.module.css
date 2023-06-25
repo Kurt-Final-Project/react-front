@@ -21,6 +21,30 @@
 	flex-direction: column;
 }
 
+.inputField {
+	display: flex;
+	flex: 1;
+	position: relative;
+}
+
+.eyeIcon {
+	all: unset;
+	position: absolute;
+	top: 50%;
+	right: 0.5rem;
+	transform: translate(-50%, -50%);
+	font-size: 1.25rem;
+}
+
+.eyeIcon:active {
+	all: unset;
+	position: absolute;
+	top: 50%;
+	right: 0.5rem;
+	transform: translate(-50%, -50%);
+	font-size: 1.25rem;
+}
+
 .invalid {
 	box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
 	outline: 2px solid red;

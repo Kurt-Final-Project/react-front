@@ -14,9 +14,11 @@ const Impressions = lazy(() => import("../Impression"));
 
 const Post = ({ postDetails, isSinglePost = false, handleDeleteBlog }) => {
 	const navigate = useNavigate();
-	const [isLiked, setIsLiked] = useState(false);
-	const [likesCount, setLikesCount] = useState(0);
-	const [commentsCount, setCommentsCount] = useState(0);
+	const { isLiked: isUserLiked, likes, comments } = postDetails;
+
+	const [isLiked, setIsLiked] = useState(isUserLiked || false);
+	const [likesCount, setLikesCount] = useState(likes || 0);
+	const [commentsCount, setCommentsCount] = useState(comments || 0);
 	const [isLoading, setIsLoading] = useState(false);
 
 	const dialogBox = useRef();
@@ -24,11 +26,12 @@ const Post = ({ postDetails, isSinglePost = false, handleDeleteBlog }) => {
 
 	const classNames = isSinglePost ? classes.container : `${classes.container} ${classes.containerEffect}`;
 	const blog_id = postDetails._id;
-	const postPath = `/feed/${blog_id}`;
+	const postPath = `/post/${blog_id}`;
 
 	const { token, user: saved_user } = useSelector((state) => state.auth);
 
 	const getLikesAndComments = useCallback(async () => {
+		if (isUserLiked !== undefined && likes !== undefined && comments !== undefined) return;
 		setIsLoading(true);
 		try {
 			const res = await getLikesAndCommentsApi({ token, blog_id });
@@ -46,7 +49,7 @@ const Post = ({ postDetails, isSinglePost = false, handleDeleteBlog }) => {
 			setIsLoading(false);
 			console.log("An error occured.", err);
 		}
-	}, [blog_id, token]);
+	}, [blog_id, token, comments, isUserLiked, likes]);
 
 	useEffect(() => {
 		getLikesAndComments();

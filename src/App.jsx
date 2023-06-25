@@ -7,9 +7,7 @@ import EditProfile from "./pages/EditProfile";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Header from "./components/Header";
-
 import isAuthenticatedLoader, { isAuthenticated } from "./utils/auth";
-import ProfilePicture from "./components/ProfilePicture";
 
 const router = createBrowserRouter([
 	{
@@ -52,10 +50,6 @@ const router = createBrowserRouter([
 				],
 			},
 			{
-				path: "/sample",
-				element: <ProfilePicture />,
-			},
-			{
 				path: "feed",
 				element: <Header />,
 				loader: isAuthenticatedLoader,
@@ -64,7 +58,13 @@ const router = createBrowserRouter([
 						index: true,
 						element: <Feed />,
 					},
-
+				],
+			},
+			{
+				path: "post",
+				element: <Header />,
+				loader: isAuthenticatedLoader,
+				children: [
 					{
 						path: ":id",
 						element: <SinglePost />,

@@ -171,7 +171,7 @@ const EditProfile = () => {
 											type="submit"
 											disabled={isSubmitting}
 											className={classes.btnSubmit}
-											btntext={"Apply Changes"}
+											btntext={"Update Profile"}
 										/>
 									</Form>
 								)}
@@ -244,7 +244,7 @@ const EditProfile = () => {
 								isInvalidField={errors.confirmPassword && touched.confirmPassword}
 							/>
 
-							<Button type="submit" disabled={isSubmitting} className={classes.btnSubmit} btntext={"Change Password"} />
+							<Button type="submit" disabled={isSubmitting} className={classes.btnSubmit} btntext={"Save Changes"} />
 						</Form>
 					)}
 				</Formik>

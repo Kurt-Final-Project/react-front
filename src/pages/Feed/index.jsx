@@ -54,7 +54,8 @@ const Feed = () => {
 
 	const handleFormSubmit = (data) => {
 		setBlogs((prev) => {
-			return [data, ...prev];
+			const newBlog = { ...data, isLiked: false, likes: 0, comments: 0 };
+			return [newBlog, ...prev];
 		});
 	};
 
