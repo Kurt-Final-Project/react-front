@@ -60,6 +60,7 @@ const Tweet = ({ onSubmit }) => {
 					btntext={"Post"}
 					type="submit"
 					disabled={isLoading || textareaValue.length < 5}
+					isSubmitting={isLoading}
 					btntype="primary"
 					isfor="tweet"
 				/>

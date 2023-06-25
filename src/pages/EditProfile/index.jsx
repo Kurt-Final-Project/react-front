@@ -134,7 +134,7 @@ const EditProfile = () => {
 								}}
 								onSubmit={updateUserDetails}
 							>
-								{({ isSubmitting, errors, touched }) => (
+								{({ isSubmitting, errors, touched, dirty }) => (
 									<Form className={classes.form}>
 										<div className={classes.formText}>
 											<h1 classes={classes.headingText}>Account Details</h1>
@@ -172,9 +172,11 @@ const EditProfile = () => {
 
 										<Button
 											type="submit"
-											disabled={isSubmitting}
+											disabled={!dirty || isSubmitting}
+											isSubmitting={isSubmitting}
 											className={classes.btnSubmit}
 											btntext={"Update Profile"}
+											isfor={"tweet"}
 										/>
 									</Form>
 								)}
@@ -221,7 +223,7 @@ const EditProfile = () => {
 					}}
 					onSubmit={updateUserPassword}
 				>
-					{({ isSubmitting, errors, touched }) => (
+					{({ isSubmitting, errors, touched, dirty }) => (
 						<Form className={classes.form}>
 							<div className={classes.formText}>
 								<h1 classes={classes.headingText}>Change Password</h1>
@@ -256,7 +258,14 @@ const EditProfile = () => {
 								setIsShowing={setShowConfirmPassword}
 							/>
 
-							<Button type="submit" disabled={isSubmitting} className={classes.btnSubmit} btntext={"Save Changes"} />
+							<Button
+								type="submit"
+								disabled={isSubmitting || !dirty}
+								isSubmitting={isSubmitting}
+								className={classes.btnSubmit}
+								btntext={"Save Changes"}
+								isfor={"tweet"}
+							/>
 						</Form>
 					)}
 				</Formik>

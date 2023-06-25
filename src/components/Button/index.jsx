@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import classes from "./Button.module.css";
 
 import Spinner from "../Spinner";
@@ -9,11 +9,19 @@ const Button = (props) => {
 			? `${props.className} ${classes.buttonPrimary}`
 			: `${props.className} ${classes.buttonSecondary}`;
 
+	const { isSubmitting, ...newProps } = props;
+
 	return (
-		<button {...props} className={btnType}>
-			{props.disabled && props.isfor === "tweet" ? props.btntext : props.disabled ? <Spinner /> : props.btntext}
+		<button {...newProps} className={btnType}>
+			{newProps.disabled && newProps.isfor === "tweet" && !isSubmitting ? (
+				newProps.btntext
+			) : newProps.disabled && isSubmitting ? (
+				<Spinner />
+			) : (
+				newProps.btntext
+			)}
 		</button>
 	);
 };
 
-export default Button;
+export default memo(Button);
