@@ -1,0 +1,45 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+	gap: 2rem;
+	line-height: 4rem;
+}
+
+.icon {
+	font-size: 10rem;
+}
+
+.headerText {
+	font-weight: bold;
+	font-size: 6rem;
+}
+
+.subText {
+	font-size: 3rem;
+}
+
+.infoText {
+	display: flex;
+	justify-content: center;
+	text-align: center;
+	font-size: 2rem;
+	color: rgba(0, 0, 0, 0.6);
+}
+
+.linkText {
+	all: unset;
+	text-align: center;
+	font-size: 2rem;
+	color: rgba(0, 0, 255, 0.5);
+}
+
+.linkText:hover {
+	all: unset;
+	text-align: center;
+	font-size: 2rem;
+	color: rgba(0, 0, 255, 1);
+	cursor: pointer;
+}

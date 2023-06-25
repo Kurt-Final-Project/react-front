@@ -17,13 +17,16 @@ const EditProfile = () => {
 	const [userDetails, setUserDetails] = useState(null);
 	const [isUserLoading, setIsUserLoading] = useState(false);
 
+	const [showPassword, setShowPassword] = useState(false);
+	const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+	const [showNewPassword, setShowNewPassword] = useState(false);
+
 	const getUserProfile = useCallback(async () => {
 		setIsUserLoading(true);
 		try {
 			const res = await getUserDetailsApi({ token, user_id });
 			const data = await res.json();
 
-			console.log(res);
 			if (!res.ok) {
 				throw data.message;
 			}
@@ -224,24 +227,33 @@ const EditProfile = () => {
 								<h1 classes={classes.headingText}>Change Password</h1>
 							</div>
 							<Input
-								type="password"
+								type={!showPassword ? "password" : "text"}
 								name="oldPassword"
 								placeholder="Old Password"
 								isInvalidField={errors.oldPassword && touched.oldPassword}
+								isPasswordField={true}
+								isShowing={showPassword}
+								setIsShowing={setShowPassword}
 							/>
 
 							<Input
-								type="password"
+								type={!showNewPassword ? "password" : "text"}
 								name="password"
 								placeholder="New Password"
 								isInvalidField={errors.password && touched.password}
+								isPasswordField={true}
+								isShowing={showNewPassword}
+								setIsShowing={setShowNewPassword}
 							/>
 
 							<Input
-								type="password"
+								type={!showConfirmPassword ? "password" : "text"}
 								name="confirmPassword"
 								placeholder="Confirm Password"
 								isInvalidField={errors.confirmPassword && touched.confirmPassword}
+								isPasswordField={true}
+								isShowing={showConfirmPassword}
+								setIsShowing={setShowConfirmPassword}
 							/>
 
 							<Button type="submit" disabled={isSubmitting} className={classes.btnSubmit} btntext={"Save Changes"} />

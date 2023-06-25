@@ -103,10 +103,10 @@ const Profile = () => {
 								<div className={classes.userInfo}>
 									<div className={classes.userName}>{`${data.first_name} ${data.last_name}`}</div>
 									{data.bio && <div className={classes.userMotto}>{data.bio}</div>}
-									{data.birthday && <div className={classes.dateCreated}>Birthday: {data.birthday}</div>}
-									<div className={classes.dateCreated}>
-										Account Created: {new Date(data.createdAt).toLocaleDateString()}
-									</div>
+									{data.birthday && (
+										<div className={classes.dateCreated}>Birthday: {new Date(data.birthday).toDateString()}</div>
+									)}
+									<div className={classes.dateCreated}>Account Created: {new Date(data?.createdAt).toDateString()}</div>
 								</div>
 								{user_id === id && (
 									<Link to={"/edit-profile"}>

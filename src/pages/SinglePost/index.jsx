@@ -35,7 +35,6 @@ const SinglePost = () => {
 			setIsBlogLoading(false);
 		} catch (err) {
 			setIsBlogLoading(false);
-			toaster.error();
 			throw err;
 		}
 	}, [token, id]);

@@ -48,7 +48,7 @@ const ImpressionButton = ({ type, isLiked, blog_id, updateCount }) => {
 		buttonType = (
 			<div className={classes.iconContainer}>
 				<AiFillLike className={`${classes.icon} ${classes.liked}`} />
-				<div className={classes.buttonText}>Liked</div>
+				<div className={`${classes.buttonText} ${classes.liked}`}>Liked</div>
 			</div>
 		);
 	}

@@ -7,11 +7,13 @@ import EditProfile from "./pages/EditProfile";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Header from "./components/Header";
+import ErrorPage from "./pages/ErrorPage";
 import isAuthenticatedLoader, { isAuthenticated } from "./utils/auth";
 
 const router = createBrowserRouter([
 	{
 		path: "/",
+		errorElement: <ErrorPage />,
 		children: [
 			{
 				index: true,

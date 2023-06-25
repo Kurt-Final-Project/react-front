@@ -62,7 +62,7 @@ const Comment = ({ commentDetails, blog_id, onDeleteCommentHandler }) => {
 				<div className={classes.userInfo}>
 					<div className={classes.nameContainer}>
 						<Link
-							to={`/profile/${user.user_at}`}
+							to={`/profile/${user._id}`}
 							className={classes.userName}
 						>{`${user.first_name} ${user.last_name}`}</Link>
 						<div className={classes.userAt}>{`@${user.user_at}`}</div>
