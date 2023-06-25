@@ -28,6 +28,7 @@
 	width: 80%;
 	overflow-y: hidden;
 	resize: none;
+	height: auto;
 	max-height: 40rem;
 }
 

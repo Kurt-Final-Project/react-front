@@ -1,4 +1,5 @@
 .container {
+	height: auto;
 	border-bottom: var(--outline);
 	display: flex;
 }
@@ -19,6 +20,7 @@
 	align-self: center;
 	width: 100%;
 	word-wrap: break-word;
+	word-break: break-all;
 	overflow: hidden;
 	resize: none;
 	max-height: 10rem;

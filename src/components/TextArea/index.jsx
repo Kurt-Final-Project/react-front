@@ -1,18 +1,28 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 import classes from "./TextArea.module.css";
 
 const TextArea = ({ placeholder, maxLength, className, textValue, value }) => {
 	const [, setTextareaValue] = useState("");
+	const textAreaRef = useRef();
+
+	const adjustTextAreaHeight = () => {
+		if (textAreaRef.current) {
+			textAreaRef.current.style.height = "auto";
+			textAreaRef.current.style.height = `${textAreaRef.current.scrollHeight}px`;
+		}
+	};
 
 	const handleTextareaInput = (event) => {
 		const value = event.target.value;
 		setTextareaValue(value);
 		textValue(value);
-
-		event.target.style.height = "auto";
-		event.target.style.height = event.target.scrollHeight + "px";
+		adjustTextAreaHeight();
 	};
+
+	useEffect(() => {
+		adjustTextAreaHeight();
+	}, [value]);
 
 	className = className ?? classes.message;
 	return (
@@ -22,6 +32,7 @@ const TextArea = ({ placeholder, maxLength, className, textValue, value }) => {
 			onChange={handleTextareaInput}
 			placeholder={placeholder}
 			maxLength={maxLength}
+			ref={textAreaRef}
 		/>
 	);
 };
