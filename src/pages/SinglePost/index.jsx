@@ -83,10 +83,13 @@ const SinglePost = () => {
 				isLoading={isBlogLoading}
 				loader={<Loading loadingText={"Loading Blog Details"} />}
 			>
-				{(data) => <Post postDetails={data} isSinglePost={true} />}
+				{(data) => (
+					<React.Fragment>
+						<Post postDetails={data} isSinglePost={true} />
+						<CommentBox onSubmit={onUserReply} />
+					</React.Fragment>
+				)}
 			</DataLoaderComponent>
-
-			<CommentBox onSubmit={onUserReply} />
 
 			<DataLoaderComponent
 				mainDependency={comments}
