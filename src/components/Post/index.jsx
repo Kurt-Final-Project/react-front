@@ -90,7 +90,7 @@ const Post = ({ postDetails, isSinglePost = false, handleDeleteBlog }) => {
 			}
 
 			if (!isSinglePost) handleDeleteBlog(blog_id);
-			else navigate("..");
+			else navigate("/feed");
 			toaster.success(data.message);
 			return data;
 		} catch (err) {
